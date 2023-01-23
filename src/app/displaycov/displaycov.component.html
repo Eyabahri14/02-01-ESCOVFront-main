@@ -1,0 +1,197 @@
+<app-nav></app-nav>
+
+<div class="page-heading" style="    padding: 180px 0px 94px 0px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="tw" style="margin-top: 10%;margin-bottom: 10%"></h1>
+
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+
+<div class="search-form">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <form id="search-form" name="gs" method="submit" role="search" action="#">
+          <div class="row">
+            <div class="row" style="width: 180%; ;">
+              <div class="col-12">
+                <form class="form" [formGroup]="add" (ngSubmit)="SearchData()">
+                  <div class="row mb-2">
+
+                    <div class="col-lg-2">
+                      <h4>Trier par :</h4>
+                    </div>
+
+                    <div class="col-lg-3" class="size">
+                      <fieldset>
+
+                        <ng-multiselect-dropdown [placeholder]="'place'" class="custom-font-size"
+                          [settings]="dropdownSettings" [data]="dropdownList" formControlName="from"
+                          [(ngModel)]="selectedItems">
+                        </ng-multiselect-dropdown>
+
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-3" class="size">
+                      <fieldset>
+                        <ng-multiselect-dropdown class="custom-font-size" [placeholder]="'to'"
+                          [settings]="dropdownSettings" [data]="dropdownList" formControlName="to"
+                          [(ngModel)]="selectedItems2">
+                        </ng-multiselect-dropdown>
+
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-2" class="size">
+                      <fieldset>
+                        <input type="date" id="start" [(ngModel)]="date" formControlName="date" name="trip-start"
+                          value="2018-07-22" class="da">
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-1">
+                      <fieldset>
+                        <button [disabled]="! add.valid" class="border-button" style="width:150px">Recherchez</button>
+                      </fieldset>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container "> -->
+<!-- <div>
+
+        <h1 style="    color: rgb(112, 140, 145);
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;    white-space: pre-line;    flex: 1 1 0% !important;    padding-top: 8px !important;
+    padding-bottom: 8px !important;">{{Cov.length}} trajets disponibles
+        </h1>
+
+    </div> -->
+
+<div class="amazing-deals">
+  <div class="container">
+    <div class="row">
+
+      <div class="reservation-form ">
+        <div class="container  ">
+
+          <div class="col-lg-12 " style="margin-top: -70px; ">
+            <form id="reservation-form"  name="gs" method="submit" role="search" action="#">
+              <div class="col-lg-12 style text-center"  >
+                <h4 >Les <em>Meilleurs</em> Trajets <em>Trouvés : </em></h4>
+                <p > trajets disponibles : {{Cov.length}}</p>
+
+              </div>
+              <div class="row justify-content-left">
+
+                <div *ngFor="let p of Cov  | paginate: { itemsPerPage: 8, currentPage: p }  ;let j = index;"
+                  class="col-lg-12 col-sm-12" style="width:30%;margin-right: 3%; ">
+
+
+
+                  <section class="card theme-green">
+                    <div class="card__map">
+                      <div class="card__map__inner">
+
+
+                      </div>
+                    </div>
+
+                    <section class="card__part card__part-2">
+
+                      <div class="card__part__side m--back">
+
+                        <div class="card__part__inner card__face">
+
+                          <div class="card__face__colored-side"></div>
+                          <h3 class="card__face__price">{{p.prix}} Dt</h3>
+                          <div class="card__face__divider">
+                          </div>
+                          <div class="card__face__path">
+                          </div>
+                          <div class="card__face__from-to">
+                            <p>Départ : {{p.from}}</p>
+                            <p>Arrivé : {{p.to}}</p>
+                          </div>
+                          <div class="card__face__deliv-date">
+                            Heure
+                            <p>{{p.heure}}</p>
+                          </div>
+                          <div class="card__face__stats card__face__stats--req">
+                            Username
+                            <p>{{p.user.username}}</p>
+                          </div>
+                          <div class="card__face__stats card__face__stats--pledge">
+                            En demande
+                            <p>{{p.isdemand}}</p>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </section>
+                  </section>
+
+
+                </div>
+
+              </div>
+              <br>
+              <div *ngIf="nodata==true ">
+
+                <div class="row">
+                  <div class="col-lg-6 align-self-center">
+                    <div class="left-image">
+                      <img src="https://raw.githubusercontent.com/nat-oku/devchallenges/main/Scarecrow.png"
+                        alt="scarecrow">
+
+                    </div>
+                  </div>
+                  <div class="col-lg-6 style text-center"  >
+                    <h4>Aucun trajet n'est disponible pour le moment</h4>
+                    <p>Ne vous inquietez pas vous pouvez vous inscrire à la newsletter afin de recevoir une
+                      notification lorsqu'un nouveau covoiturage est publié</p>
+                    <br>
+                    <br>
+                    <br>
+                    <button (click)="open()"> Newsletter</button>
+
+                  </div>
+
+                </div>
+              </div>
+
+              <pagination-controls class=" col-lg-12 section-heading text-center" (pageChange)="p = $event">
+              </pagination-controls>
+
+            </form>
+
+
+
+            <!-- </div> -->
+            <div class="row " *ngIf="isloading==false">
+              <div class="spinner-border" role="status" style="color: red; position: absolute;left: 50%;top: 50%;">
+                <span class="sr-only"> </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+  </div>
+  <app-footer></app-footer>

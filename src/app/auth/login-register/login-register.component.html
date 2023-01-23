@@ -1,0 +1,73 @@
+
+<app-nav></app-nav>
+<div class="container" style="width: 85%;height: 100%;margin-top:10%;margin-bottom:5%"id="container">
+  <div class="form-container sign-up-container">
+    <form  [formGroup]="userRegister">
+      <h1>Créer votre compte</h1>
+     <br>
+      <input   formControlName="username"  required maxlength="20" minlength="7" type="text" placeholder="nom et prenom" name="username"  />
+      <div *ngIf="userRegister.controls.username.invalid && userRegister.controls.username.touched">
+        <small *ngIf="userRegister.controls.username.errors?.['required']" class="text-danger"> nom et prénom obilgatoire</small>
+        <small *ngIf="userRegister.controls.username.errors?.['minlength']" class="text-danger">minimum 7 caractéres</small>
+        <small *ngIf="userRegister.controls.username.errors?.['maxlength']" class="text-danger">maximum 20 caractéres</small>
+      </div>
+
+      <input   formControlName="email"  required  type="email" placeholder="email" name="p"   />
+      <div *ngIf="userRegister.controls.email.invalid && userRegister.controls.email.touched">
+        <small *ngIf="userRegister.controls.email.errors?.['required']" class="text-danger"> l'email est obilgatoire</small>
+      </div>
+
+
+      <input   formControlName="contact"  type="text" placeholder="Ex. +216 xx xxx xxx" name="contact"   />
+      <div *ngIf="userRegister.controls.contact.invalid && userRegister.controls.contact.touched">
+        <small *ngIf="userRegister.controls.contact.errors?.['required'] " class="text-danger"> numéro obligatoire </small>
+        <small *ngIf="userRegister.controls.contact.errors?.['minlength'] " class="text-danger"> minimum 8 chiffres </small>
+        <small *ngIf="userRegister.controls.contact.errors?.['maxlength'] " class="text-danger"> maximum 8 chiffres </small>
+
+      </div>
+
+      <input   formControlName="password"    type="password" placeholder="password" name="p"   />
+      <div *ngIf="userRegister.controls.password.invalid && userRegister.controls.password.touched">
+        <small *ngIf="userRegister.controls.password.errors?.['required'] " class="text-danger"> mot de passe obligatoire </small>
+
+      </div>
+
+
+
+      <button class="btnn" (click)="Register()">Sign Up</button>
+    </form>
+  </div>
+  <div class="form-container sign-in-container">
+    <form [formGroup]="userLogin">
+      <h1>Connectez vous</h1>
+
+<br>
+      <input   formControlName="email"   type="text" placeholder="Email" name="email"  />
+      <input   formControlName="password"    type="password" placeholder="Password" name="p"   />
+
+      <a routerLink="/reset"  style=" background-color: transparent;
+      border: none;
+      font-weight: 600;
+      color: #3DAFE1;
+      cursor: pointer;">Vous avez oublié votre mot de passe?</a>
+      <button class="btnn" (click)="login()" >Connexion</button>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <br>
+        <button class="ghost" id="signIn">Sign In</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>Hello, Friend!</h1>
+        <br>
+
+        <button class="ghost" id="signUp"><div >Sign Up </div></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

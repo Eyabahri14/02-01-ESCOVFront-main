@@ -1,0 +1,188 @@
+
+<app-nav></app-nav>
+
+<div class="page-heading">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="tw"></h1>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+
+<div class="search-form">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <form id="search-form" name="gs" method="submit" role="search" action="#">
+          <div class="row">
+            <div class="row" style="width: 180%; ;">
+              <div class="col-12">
+                <form class="form" [formGroup]="add" (ngSubmit)="addData()">
+
+                  <div class="row mb-2">
+
+                    <div class="col-lg-2 ">
+                      <h4>Trier par:</h4>
+                    </div>
+
+                    <div class="col-lg-3" class="size" >
+                      <fieldset>
+
+                        <!-- <ng-autocomplete [data]="data" [searchKeyword]="keyword"
+                            [itemTemplate]="itemTemplate" (selected)='selectEvent($event)'
+                            [notFoundTemplate]="notFoundTemplate" placeholder="Départ">
+                        </ng-autocomplete> -->
+
+                        <ng-multiselect-dropdown class="custom-font-size" placeholder="départ"
+                                                 [settings]="dropdownSettings" [data]="dropdownList" formControlName="from">
+                        </ng-multiselect-dropdown>
+
+
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-3" class="size">
+                      <fieldset>
+                        <!-- <ng-autocomplete [data]="data" [searchKeyword]="keyword"
+                            [itemTemplate]="itemTemplate" (selected)='selectEvent2($event)'
+                            [notFoundTemplate]="notFoundTemplate" placeholder="Destination">
+                        </ng-autocomplete> -->
+
+                        <ng-multiselect-dropdown class="custom-font-size" [placeholder]="'destination'"
+                                                 [settings]="dropdownSettings" [data]="dropdownList" formControlName="to">
+
+                        </ng-multiselect-dropdown>
+
+
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-2" class="size">
+                      <fieldset>
+                        <input type="date" id="start" formControlName="date" name="trip-start" value="2018-07-22"
+                               class="da">
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-2">
+                      <fieldset>
+                        <button [disabled]="! add.valid" class="border-button">Recherchez</button>
+                      </fieldset>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="more-info reservation-info reveal">
+  <div class="container">
+    <div class="col-md-12 text-center aos-init aos-animate" data-aos="fade">
+      <h2 class="site-section-heading text-uppercase text-center font-secondary">Nos services</h2>
+    </div>
+    <br>
+    <div class="row">
+
+      <div class="col-lg-4 col-sm-6">
+        <div class="info-item" style="  transition: all .5s;">
+          <i class="fa-solid fa-money-bill"></i>
+          <h4>Vos trajets préférés à petits prix</h4>
+          <p>Lorem, ipsum dolor sit amet consectetur adriatur atque eaque illum voluptatum culpa et, error, quos nostrum ut exercitationem?</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6">
+        <div class="info-item" style="  transition: all .5s;">
+          <i class="fa-sharp fa-solid fa-shield-halved"></i>
+          <h4>Voyagez en toute confiance</h4>
+          <p>Nous prenons le temps qu’il faut pour connaître nos membres et nos compagnies de bus partenaires.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6">
+        <div class="info-item" style="  transition: all .5s;">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <h4>Recherchez, cliquez et réservez ! </h4>
+          <p>Réserver un trajet devient encore plus simple ! Facile d'utilisation et dotée de technologies avancées.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="more-about reveal  fade-bottom">
+  <div class="container reveal  fade-bottom">
+    <h1 style="text-align: center;
+    vertical-align: middle;
+    line-height: 90px;color: #04c799; ">Covoiturer sur les trajets du quotidien, c’est pratique, économique et
+      écologique.</h1>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+
+      <div class="col-lg-6">
+        <div class="section-heading">
+          <h2>Un petit geste pour vous, un grand pas pour la planète. </h2>
+        </div>
+
+        <p>Saviez-vous que le taux d’occupation des voitures est de 1,08 personne par véhicule sur les petits trajets de
+          tous les jours ? Que les transports sont la première source de gaz à effet de serre ? En covoiturant, vous
+          participez à la réduction des véhicules sur les routes et des émissions de CO2 🚀 </p>
+
+      </div>
+      <div class="col-lg-6 align-self-center">
+        <div class="right-image"  style="  transition: all .5s;">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/58beb99ff7e0ab44aa9cd3cd/1612185975911-L94MQN5FXQ6VV9R0JM4D/illustrations_BBL_1+copie+13.png?format=750w"
+            alt="">
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-lg-6 align-self-center">
+        <div class="left-image">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/58beb99ff7e0ab44aa9cd3cd/1612179083486-CNIPQBMIVTLK3FBUZKA7/illustrations_BBL_1+copie+11+%281%29.png?format=750w"
+            alt="">
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="section-heading">
+          <h2>Faites des économies à chaque trajet. </h2>
+          <p>Covoiturer sur les trajets du quotidien, c’est pratique, économique et écologique.</p>
+        </div>
+
+        <p>Faites des économies à chaque trajet.
+          Rouler au quotidien, on sait ce que c’est ! Plein d’essence, assurance, entretien… Cela revient vite cher de
+          rouler en solo. En partageant les frais grâce au covoiturage, c’est comme si vous payiez le litre d’essence
+          0,50 dt !* Pas mal, non ?</p>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<br>
+
+<app-footer></app-footer>

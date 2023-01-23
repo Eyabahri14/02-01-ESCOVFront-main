@@ -1,0 +1,254 @@
+<app-nav></app-nav>
+<br>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+
+<div class="reservation-form " style="margin-bottom: 0%;">
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-lg-12">
+        <form [formGroup]="add" (ngSubmit)="addData()" id="reservation-form" name="gs" method="submit"
+              *ngIf=" step == 0 ">
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="row">
+
+                <button title="supprimer posts" (click)="delete()"
+                        style="border:0px;background-color:#dc3545 ;width: 30px;height:33px;padding: 6px 6px;margin-right: 03%;margin-top: 04%;margin-left: 80%;"
+                        class="some-button" type="button">
+
+                  <i class="fa-solid fa-trash"></i>
+
+                </button>
+                <button    title="{{disabled_texte}}" (click)="disable()"
+                           style="border:0px;background-color:#dc3545 ;width: 30px;height:33px;padding: 6px 6px;margin-top: 04%;"
+                           class="some-button" type="button">
+
+                  <i *ngIf="disabled==false" class="fa-solid fa-eye-slash"></i>
+                  <i *ngIf="disabled==true" class="fa-solid fa-eye"></i>
+                </button>
+
+              </div>
+              <h4>Editez <em> Votre</em> Trajet <em> :</em></h4>
+              <div class=" progress-wrap" style="margin-bottom: 50px;">
+                <div class="line-progress-bar">
+                  <div class="line"></div>
+                  <ul class="checkout-bar">
+                    <li class="progressbar-dots active"><span>step 1</span></li>
+                    <li class="progressbar-dots"><span>step 2</span></li>
+                    <li class="progressbar-dots"><span>Final step</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <fieldset>
+                <label class="form-label">Your Name</label>
+                <input value="aaa" style="margin-bottom:0%" formControlName="name" type="text" name="Name"
+                       formControlName="name" placeholder="Ex. John Smithee" autocomplete="on" required="">
+                <!-- <div class="form-control-feedback"
+              *ngIf="add.controls.name.errors && (add.controls.name.dirty || add.controls.name.touched) ">
+              <p style="color: red;" *ngIf="add.controls.name.errors?.['required']">name is
+                  required</p>
+                </div> -->
+              </fieldset>
+
+              <div *ngIf="add.controls.name.invalid && add.controls.name.touched">
+                <small *ngIf="add.controls.name.errors?.['required']" class="text-danger"> name is required</small>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <fieldset>
+                <label class="form-label">Your Phone Number</label>
+                <input value="95590010" style="margin-bottom:0%" formControlName="number" required maxlength="8"
+                       minlength="8" type="text" name="Number" formControlName="number"
+                       (input)="numbersOnlyValidator($event)" class="Number" placeholder="Ex. +216 xx xxx xxx"
+                       autocomplete="on" required="">
+              </fieldset>
+
+              <div *ngIf="add.controls.number.invalid && add.controls.number.touched">
+                <small *ngIf="add.controls.number.errors?.['required'] " class="text-danger"> number is required</small>
+                <small *ngIf="add.controls.number.errors?.['minlength'] " class="text-danger"> minimum 8 numbers
+                </small>
+                <small *ngIf="add.controls.number.errors?.['maxlength'] " class="text-danger"> maximum 8 numbers
+                </small>
+
+              </div>
+            </div>
+            <p style="color: red;" *ngIf="add.hasError('yourErrorName')">*Please fill all the form!</p>
+            <br>
+            <div class=" row-lg-12" style="margin-top: 30px;">
+
+              <button style="width: 30%;margin-right: 10%;margin-left: 15%;" type="button"
+                      (click)="goBack()">Précedent</button>
+              <button style="width: 30%" class="main-button" [disabled]="!add.valid">Suivant</button>
+
+
+            </div>
+
+          </div>
+
+
+        </form>
+        <form [formGroup]="add2" (ngSubmit)="addData()" id="reservation-form" name="gs" method="submit"
+              *ngIf=" step == 1 ">
+          <div class="col-lg-12">
+            <h4>Partagez <em> Votre</em> Trajet <em> :</em></h4>
+            <div class="progress-wrap" style="margin-bottom: 50px;">
+              <div class="line-progress-bar">
+                <div class="line"></div>
+                <ul class="checkout-bar">
+                  <li (click)="goBack()" class="progressbar-dots "><span>step 1</span></li>
+                  <li class="progressbar-dots active"><span>step 2</span></li>
+                  <li class="progressbar-dots"><span>Final step</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-lg-6">
+              <fieldset>
+                <label class="form-label">Départ</label>
+
+                <ng-multiselect-dropdown [placeholder]="'place'" class="custom-font-sizeee"
+                                         [settings]="dropdownSettings" [data]="dropdownList" formControlName="from"
+                                         [(ngModel)]="selectedItems">
+                </ng-multiselect-dropdown>
+
+              </fieldset>
+
+              <div *ngIf="add2.controls.from.invalid && add2.controls.from.touched">
+                <small *ngIf="add2.controls.from.errors?.['required']" class="text-danger">veuillez indiquez votre
+                  destination de départ</small>
+              </div>
+
+            </div>
+            <div class="col-lg-6">
+              <fieldset>
+                <label class="form-label">Destination</label>
+                <ng-multiselect-dropdown class="custom-font-sizeee" [placeholder]="'to'" [settings]="dropdownSettings"
+                                         [data]="dropdownList" formControlName="to" [(ngModel)]="selectedItems2">
+                </ng-multiselect-dropdown>
+                <div *ngIf="add2.controls.to.invalid && add2.controls.to.touched">
+                  <small *ngIf="add2.controls.to.errors?.['required']" class="text-danger">veuillez indiquez votre
+                    destination d'arrivée</small>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <p style="color: red;" *ngIf="add.hasError('yourErrorName')">*Please fill all the form!</p>
+
+          <div class="col-lg-12" style="margin-top: 30px;">
+            <fieldset>
+              <button style="width: 30%;margin-right: 10%;margin-left: 15%;" type="button"
+                      (click)="goBack()">Précedent</button>
+              <button style="width: 30%" class="main-button" [disabled]="!add2.valid">Suivant</button>
+            </fieldset>
+          </div>
+
+
+        </form>
+        <form [formGroup]="add3" (ngSubmit)="addData()" id="reservation-form" name="gs" method="submit"
+              *ngIf=" step == 2 ">
+          <div class="col-lg-12">
+            <h4>Partagez <em> Votre</em> Trajet <em> :</em></h4>
+            <div class="progress-wrap" style="margin-bottom: 50px;">
+              <div class="line-progress-bar">
+                <div class="line"></div>
+                <ul class="checkout-bar">
+                  <li class="progressbar-dots "><span>step 1</span></li>
+                  <li (click)="goBack()" class="progressbar-dots "><span>step 2</span></li>
+                  <li class="progressbar-dots active"><span>Final step</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-lg-6">
+              <fieldset>
+                <label class="form-label">Nombre de place</label>
+                <input style="margin-bottom:0%" type='number' name="Name" formControlName="nbplace" required max="7"
+                       min=0 class="Name" placeholder="Ex. 2 or 3 or 4">
+
+              </fieldset>
+              <div *ngIf="add3.controls.nbplace.invalid && add3.controls.nbplace.touched">
+                <small *ngIf="add3.controls.nbplace.errors?.['required']" class="text-danger">veuillez indiquez votre
+                  nombre de places</small>
+                <small *ngIf="add3.controls.nbplace.errors?.['min']" class="text-danger">minimum 0 places</small>
+                <small *ngIf="add3.controls.nbplace.errors?.['max']" class="text-danger">maximum 7 places</small>
+
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <fieldset>
+                <label class="form-label">Check In Date</label>
+                <!-- datetime-local -->
+                <input (input)="dateValidator($event)" style="margin-bottom:0%" [(ngModel)]="date"
+                       formControlName="date" type="datetime-local" name="date">
+              </fieldset>
+
+              <div *ngIf="add3.controls.date.invalid && add3.controls.date.touched">
+                <small *ngIf="add3.controls.date.errors?.['required']" class="text-danger">la date est
+                  obligatoire</small>
+                <small *ngIf="add3.controls.date.errors?.['invalidDate']" class="text-danger">Veuillez mettre une date
+                  correcte</small>
+              </div>
+
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-lg-6">
+              <fieldset>
+                <label class="form-label">Prix</label>
+                <input style="margin-bottom:0%" min=0 formControlName="price" type='number' name="Name" class="Name"
+                       placeholder="Ex. 12dt">
+              </fieldset>
+
+              <div *ngIf="add3.controls.price.invalid && add3.controls.price.touched">
+                <small *ngIf="add3.controls.price.errors?.['required']" class="text-danger">le prix est
+                  obligatoire</small>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <fieldset>
+                <label class="form-label">Additional information</label>
+                <input style="margin-bottom:0%" formControlName="description" type='text' name="Name" class="Name"
+                       placeholder="Ex. points communes">
+              </fieldset>
+            </div>
+          </div>
+          <br>
+          <p style="color: red;" *ngIf="add.hasError('yourErrorName')">*Please fill all the form!</p>
+
+          <div class=" row-lg-12" style="margin-top: 30px;">
+            <fieldset>
+              <button style="width: 30%;margin-right: 10%;margin-left: 15%;" type="button"
+                      (click)="goBack()">Précedent</button>
+              <button style="width: 30%" class="main-button" [disabled]="!add3.valid">Suivant</button>
+
+            </fieldset>
+          </div>
+
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+  <br>
+</div>
+<br>
+<br>
+<br>
+<br>
+<app-footer></app-footer>

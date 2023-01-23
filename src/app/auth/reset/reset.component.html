@@ -1,0 +1,98 @@
+<app-nav></app-nav>
+<div class="container" style="width: 90%;height: 90%;margin-top:10%;margin-bottom:5%;margin-left:5%;" id="container">
+
+  <div class="form-container sign-in-container">
+
+    <div *ngIf="otpverified==false">
+
+      <h2 class="pp" style="padding-top: 20%;">Tapez votre otp</h2>
+      <br>
+      <form [formGroup]="otp">
+        <div class="wrapper" style="margin-left: 16%;">
+          <input placeholder="-" formControlName="otp1" type="text" class="field 1" maxlength="1">
+          <input placeholder="-" formControlName="otp2" type="text" class="field 2" maxlength="1">
+          <input placeholder="-" formControlName="otp3" type="text" class="field 3" maxlength="1">
+          <input placeholder="-" formControlName="otp4" type="text" class="field 4" maxlength="1">
+        </div>
+        <button (click)="redirect()" class="resend">
+          Resend OTP
+          <i class="fa fa-caret-right"></i>
+        </button>
+        <button class="btnn" (click)="otpfct()">Envoyer</button>
+
+      </form>
+    </div>
+
+    <div *ngIf="otpverified==true">
+      <form [formGroup]="resetForm">
+        <h2 class="pp" style="padding-top: 20%;">Ecrivez votre nouvel mot de passe</h2>
+        <br>
+        <br>
+        <input type="password" placeholder="password" formControlName="password">
+        <div *ngIf="resetForm.controls.password.invalid && resetForm.controls.password.touched">
+          <small *ngIf="resetForm.controls.password.errors?.['required'] " class="text-danger"> password obligatoire
+          </small>
+        </div>
+        <br>
+        <input type="password" placeholder="Confirmer" formControlName="confirmPassword">
+        <div *ngIf="resetForm.controls.confirmPassword.invalid && resetForm.controls.confirmPassword.touched">
+          <small *ngIf="resetForm.controls.confirmPassword.errors?.['required'] " class="text-danger"> mot de passe
+            obligatoire
+          </small>
+          <div *ngIf="resetForm.controls.confirmPassword.hasError('matching')" style="color: red;">Password and Confirm
+            Password must be match.</div>
+
+        </div>
+        <button [disabled]="!resetForm.valid" class="btnn" (click)="ResetPassword()">Envoyer</button>
+      </form>
+    </div>
+  </div>
+  <!-- <div class="form-container sign-in-container">
+   <button (click)="backFct()" style="margin-left: 8%;margin-top:7%"><i class="fa-solid fa-arrow-left"></i></button>
+
+    <form [formGroup]="resetForm" >
+      <h2 class="pp" >Changez votre mot de passe</h2>
+      <br>
+      <input type="text" placeholder="otp" required minlength="4"     maxlength="4"  formControlName="otp">
+      <div *ngIf="resetForm.controls.otp.invalid && resetForm.controls.otp.touched">
+        <small *ngIf="resetForm.controls.otp.errors?.['required'] " class="text-danger"> otp obligatoire </small>
+        <small *ngIf="resetForm.controls.otp.errors?.['minlength'] " class="text-danger"> minimum 4 chiffres </small>
+        <small *ngIf="resetForm.controls.otp.errors?.['maxlength'] " class="text-danger"> maximum 4 chiffres </small>
+      </div>
+      <br>
+      <input type="text" placeholder="email" formControlName="email">
+      <div *ngIf="resetForm.controls.email.invalid && resetForm.controls.email.touched">
+        <small *ngIf="resetForm.controls.email.errors?.['required'] " class="text-danger"> email obligatoire </small>
+      </div>
+      <br>
+      <input type="text" placeholder="password" formControlName="password">
+      <div *ngIf="resetForm.controls.password.invalid && resetForm.controls.password.touched">
+        <small *ngIf="resetForm.controls.password.errors?.['required'] " class="text-danger"> mot de passe obligatoire </small>
+
+      </div>
+      <button [disabled]="!resetForm.valid" (click)="ResetPassword()">Envoyer</button>
+    </form>
+  </div> -->
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please login with your personal info</p>
+        <button class="ghost" id="signIn">Sign In</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <div class="content">
+          <!-- <h3>Une fois votre mot de passe modifié,vous pourrez vous connecté !</h3> -->
+          <br>
+
+        </div>
+        <img src="assets/images/forgotpassword.svg" class="image" alt="" />
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-footer></app-footer>

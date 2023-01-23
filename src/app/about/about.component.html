@@ -1,0 +1,66 @@
+
+
+  <div class="reservation-form2 " style="; margin-bottom:0%;margin-top: 0%">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-12">
+          <form id="reservation-form2" [formGroup]="add" (ngSubmit)="addData()" name="gs" method="submit" role="search"
+            action="#">
+            <div class="row">
+              <div class="col-lg-12">
+                <h4>Souhaitez-<em>vous </em> Etre <em> Informe </em></h4>
+                <h4>Lorsque un nouveau covoiturage apparait ?</h4>
+                <p>- Inscrivez vous a la newsletter pour recevoir le prochain covoiturage
+                </p>
+                <p>
+                  - Vous pouvez ajouter multiples positions de départ et de destinations
+                </p>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <label for="Name" class="form-label">from : </label>
+                  <ng-multiselect-dropdown [placeholder]="'place'" class="custom-font-sizee"
+                    [settings]="dropdownSettings" [data]="dropdownList" formControlName="from">
+                  </ng-multiselect-dropdown>
+
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <label for="Number" class="form-label">to : </label>
+                  <ng-multiselect-dropdown [placeholder]="'destination'" class="custom-font-sizee"
+                    [settings]="dropdownSettings" [data]="dropdownList" formControlName="to">
+                  </ng-multiselect-dropdown>
+
+                </fieldset>
+              </div>
+
+
+            </div>
+            <div class="col-lg-6">
+              <fieldset>
+                <label for="Number" class="form-label">Check In Date</label>
+                <!-- datetime-local -->
+                <br>
+                <input style="  width: 98.5% !important;" formControlName="date" type="date" name="date" class="daa"
+                  required="">
+
+              </fieldset>
+            </div>
+            <br>
+            <p style="color: red;" *ngIf="add.hasError('yourErrorName')">*Please fill all the form!</p>
+
+            <div class="col-lg-12">
+              <fieldset>
+                <button class="main-button">Confirmer</button>
+              </fieldset>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+    <br>
+  </div>

@@ -1,0 +1,86 @@
+
+<app-nav></app-nav>
+
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+
+
+<div class="reservation-form ">
+
+  <div class="container  ">
+    <div class="col-lg-12">
+      <form id="reservation-form" name="gs" method="submit" role="search" action="#">
+        <div class="col-lg-12">
+
+          <app-profile-auth></app-profile-auth>
+
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+
+          <h4>Vos <em>Publications</em> Recentes</h4>
+        </div>
+        <div class="row justify-content-left">
+          <div *ngFor="let p of publication| paginate: { itemsPerPage: 8, currentPage: p } ;let j = index;"
+               class="col-lg-12 col-sm-12" style="width:30%;margin-right: 3%; ">
+
+            <div div="card-container">
+              <section class="card theme-green">
+                <div class="card__map">
+                  <div class="card__map__inner"></div>
+
+                </div>
+
+                <section class="card__part card__part-2">
+
+                  <div class="card__part__side m--back">
+
+                    <div class="card__part__inner card__face">
+
+
+                      <div class="card__face__colored-side"></div>
+                      <h3 class="card__face__price">{{p.prix}} Dt</h3>
+                      <div class="card__face__divider">
+                      </div>
+                      <div class="card__face__path">
+                      </div>
+                      <div class="card__face__from-to">
+                        <p>{{p.from}}</p>
+                        <p>{{p.to}}</p>
+                      </div>
+                      <div class="card__face__deliv-date">
+                        Heure
+                        <p>{{p.heure}}</p>
+                      </div>
+                      <div class="card__face__stats card__face__stats--req">
+                        Date
+                        <p>{{p.date}}</p>
+                      </div>
+                      <div class="card__face__stats card__face__stats--pledge">
+                        En demande
+                        <p>{{p.isdemand}}</p>
+                      </div>
+                      <button [routerLink]="'/editcov/'+p._id"  style="border:0px;background-color:#0060c6 ;width: 30px;height:33px;padding: 6px 6px;position:absolute; top:0; right:0;margin-right: 08%;margin-top: 04%;" class="some-button">
+
+                        <i class="fa-solid fa-arrow-right"></i>                    </button>
+                    </div>
+
+                  </div>
+                </section>
+              </section>
+
+            </div>
+          </div>
+        </div>
+        <pagination-controls class=" col-lg-12 section-heading text-center" (pageChange)="p = $event">
+        </pagination-controls>
+      </form>
+
+    </div>
+
+  </div>
+</div>
+<br>
+
+<app-footer></app-footer>

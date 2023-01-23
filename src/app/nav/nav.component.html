@@ -1,0 +1,72 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Responsive navigation bar</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--<meta name="description" content="ketwords" />-->
+</head>
+
+<header>
+  <nav>
+    <!-- ***** Logo Start ***** -->
+
+
+    <div class="icon"
+         type="button"
+         data-toggle="collapse"
+         data-target="#navbarNav"
+         aria-controls="navbarNav"
+         aria-expanded="false"
+         aria-label="Toggle navigation">
+      <span class="toggle" >☰</span>
+    </div>
+
+
+
+    <ul class="list-item" style="
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: 14px;">
+      <li> <a href="index.html" class="logo">
+        <h1 style="color: white;padding-top: 4%;font-size: 35px">ESCOV</h1>
+      </a></li>
+
+
+      <li style="font-family: Kanit"><a routerLinkActive="active" routerLink="/home">Home</a></li>
+      <li><a routerLinkActive="active" routerLink="/addcov">
+        <i class="fa-solid fa-plus"></i>
+        Publier un trajet</a></li>
+
+
+      <li *ngIf="deconnexion==false">
+
+        <a routerLinkActive="active" routerLink="/about">Se connecter</a>
+      </li>
+
+      <li  *ngIf="deconnexion==true" class="nav-item dropdown">
+        <div id="one" data-bs-toggle="dropdown">
+
+          <div class="circle" [ngStyle]="{'background-color':  circleColor }">
+            <img class="avatar" class="user" *ngIf="!showInitials" src="{{photoUrl}}">
+
+            <div *ngIf="showInitials" class="initials">
+              {{ initials }}
+            </div>
+          </div>
+        </div>
+
+        <div class="dropdown-menu dropdown-menu-end dropstyle" >
+          <a routerLink="/profile" style="color:black ; font-size:  17px;display: flex;justify-content: center;border-radius: 100px" class="dropdown-item">Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" style="color:black; font-size: 17px;display: flex;justify-content:center ;border-radius: 100px">Déconnexion</a>
+        </div>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+</html>
