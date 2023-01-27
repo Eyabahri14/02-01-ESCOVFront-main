@@ -30,15 +30,16 @@
   justify-content: center;
   position: relative;
   bottom: 14px;">
-      <li> <a href="index.html" class="logo">
+    <!--  <li> <a href="index.html" class="logo">
         <h1 style="color: white;padding-top: 4%;font-size: 35px">ESCOV</h1>
       </a></li>
+      -->
 
 
-      <li style="font-family: Kanit"><a routerLinkActive="active" routerLink="/home">Home</a></li>
+      <li style="font-family: Kanit"><a routerLinkActive="active" routerLink="/home"><strong>Home</strong></a></li>
       <li><a routerLinkActive="active" routerLink="/addcov">
         <i class="fa-solid fa-plus"></i>
-        Publier un trajet</a></li>
+       <strong> Publier un trajet</strong></a></li>
 
 
       <li *ngIf="deconnexion==false">

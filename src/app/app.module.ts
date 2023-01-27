@@ -31,6 +31,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {LayoutModule} from "@angular/cdk/layout";
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {LayoutModule} from "@angular/cdk/layout";
     ResetPasswordComponent,
     ProfileAuthComponent,
     EditCovComponent,
+    ButtonComponent,
 
   ],
   imports: [

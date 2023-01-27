@@ -1,3 +1,11 @@
+
+@font-face{
+  font-family: "Kanit";
+  src:url("src/assets/fonts/Kanit/Kanit-Bold.ttf")format("ttf");
+
+}
+
+
 /*
 
 TemplateMo 580 Woox Travel
@@ -146,7 +154,7 @@ body {
   /* scrollbar-gutter: stable both-edges;
 
   overflow-y:scroll; */
-  font-family: 'Poppins', sans-serif;
+  font-family: Kanit;
   font-weight: 400;
   background-color: #fff;
   font-size: 16px;
@@ -2055,12 +2063,13 @@ Deals Page Style
 
 .page-heading {
   /* background-image: url("../images/photoescov.png"); */
-  background-image: url("https://cdn.templates.unlayer.com/assets/1664470657830-gif.gif");
+ /* background-image: url("https://media.tenor.com/Hsm0cKGy5EcAAAAd/driving-road-trip.gif"); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 300px 0px 190px 0px;
+  height: 30%;
   text-align: center;
+  position: relative;
   /* height: 150px; */
 }
 

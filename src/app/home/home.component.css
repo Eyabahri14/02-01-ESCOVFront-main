@@ -88,3 +88,26 @@ h5,
   }
 
 }
+
+.tw{
+  position: absolute;
+  z-index: 2;
+  top: 200px;
+  left: 580px;
+  font-family: Poppins;
+
+}
+.tw:hover {
+ color: black;
+
+}
+@media  (max-width: 920px) {
+  .tw{
+    position: absolute;
+    z-index: 2;
+    top: 200px;
+    left: 80px;
+    font-family: Poppins;
+
+  }
+}

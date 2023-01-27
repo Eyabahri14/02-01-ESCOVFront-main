@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit {
       loop: true,
       typeSpeed: 80,
       deleteSpeed: 80,
-      typeColor: '#7fc6a6'
+      typeColor: '#000000'
 
     })
 

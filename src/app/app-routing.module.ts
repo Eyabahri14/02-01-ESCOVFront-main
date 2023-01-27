@@ -13,6 +13,7 @@ import {ResetComponent} from "./auth/reset/reset.component";
 import {LoginGuard} from "./login.guard";
 import {ProfileAuthComponent} from "./auth/profile-auth/profile-auth.component";
 import {EditCovComponent} from "./edit-cov/edit-cov.component";
+import {ButtonComponent} from "./button/button.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'login-register', pathMatch: 'full'},
@@ -26,7 +27,7 @@ const routes: Routes = [
   {path:'resetPassword' ,component:ResetComponent },
   {path:'prof' ,component:ProfileAuthComponent },
   { path: 'editcov/:id', component: EditCovComponent },
-
+  { path: 'button', component: ButtonComponent },
 ];
 
 
