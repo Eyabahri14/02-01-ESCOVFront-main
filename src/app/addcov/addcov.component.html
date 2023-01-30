@@ -122,11 +122,13 @@
           </div>
           <p style="color: red;" *ngIf="add.hasError('yourErrorName')">*Please fill all the form!</p>
 
-          <div class="col-lg-12" style="margin-top: 30px;">
-            <fieldset>
-              <button style="width: 30%;margin-right: 10%;margin-left: 15%;" type="button" (click)="goBack()" >Précedent</button>
-              <button style="width: 30%" class="main-button"  [disabled]="!add2.valid">Suivant</button>
-            </fieldset>
+          <div class=" row-lg-12" style=" margin-top: 30px;display: flex;justify-content: center;align-items: center">
+
+            <button style="width:30%" (click)="goBack()" >Précedent</button>
+            <div style="margin-left:10%"></div>
+            <button style="width:30%"  [disabled]="!add.valid" >Suivant</button>
+
+
           </div>
 
 
@@ -206,12 +208,13 @@
           <br>
           <p style="color: red;" *ngIf="add.hasError('yourErrorName')">*Please fill all the form!</p>
 
-          <div class=" row-lg-12" style="margin-top: 30px;">
-            <fieldset>
-              <button style="width: 30%;margin-right: 10%;margin-left: 15%;" type="button" (click)="goBack()" >Précedent</button>
-              <button style="width: 30%" class="main-button"  [disabled]="!add3.valid">Suivant</button>
+          <div class=" row-lg-12" style=" margin-top: 30px;display: flex;justify-content: center;align-items: center">
 
-            </fieldset>
+            <button style="width:30%" (click)="goBack()" >Précedent</button>
+            <div style="margin-left:10%"></div>
+            <button style="width:30%"  [disabled]="!add.valid" >Suivant</button>
+
+
           </div>
 
 

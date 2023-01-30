@@ -236,7 +236,7 @@ p span.phone-number {
 .wrapper input.field {
   width: 50px;
   line-height: 45px;
-  font-size: 32px;
+  font-size: 20px;
   border: none;
   background-color: #EAF5F6;
   border-radius: 5px;
@@ -367,6 +367,7 @@ button.resend i {
 }
 
   .wrapper input.field{
+    font-size:8px;
     width: 30px;
     padding: 10px;
 

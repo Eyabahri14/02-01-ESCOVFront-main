@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { Router } from '@angular/router';
 import {AuthService} from "../../auth.service";
 import {data} from "jquery";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-login-register',
@@ -15,13 +16,13 @@ public email1:any;
 public contact:any;
 public id:any;
   userLogin= new FormGroup({
-    email : new FormControl('',[Validators.required]),
+    email : new FormControl('',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]+\.[a-zA-Z0-9]+@esprit\.tn$/)]),
     password : new FormControl('',[Validators.required])
 
   })
   userRegister= new FormGroup({
     username : new FormControl('',[Validators.required,Validators.minLength(7),Validators.maxLength(20)]),
-    email : new FormControl('',[Validators.required]),
+    email : new FormControl('',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]+\.[a-zA-Z0-9]+@esprit\.tn$/)]),
     password :new FormControl('',[Validators.required]),
     contact : new FormControl('', [Validators.required,Validators.minLength(8),Validators.maxLength(8)])
 
@@ -74,13 +75,19 @@ public id:any;
 
             // console.log(((data as {[key: string]: any})['token']));
             console.log(data);
-
             this.router.navigate(['/home']);
           }
 
         },
 
         error => {
+          if(error.status==400){
+            Swal.fire(
+              'erreur!',
+              'Votre mot de passe est incorrect!',
+              'error'
+            );
+          }
         }
       );
 
@@ -88,14 +95,33 @@ public id:any;
   }
 
 
-  Register(){
-    this.authService.register(this.userRegister.value).subscribe((res: any) => {
-      alert('user added ');
+  Register(){ this.authService.register(this.userRegister.value).subscribe((res: any) => {
 
-    }, (err) => {
-      console.log(err);
+      Swal.fire(
+        'Excellent!',
+        'Vous avez bien ajouté votre compte!',
+        'success'
+      );
+    },
+    err => {
+      if (err.status==400) {
+        Swal.fire(
+          'erreur!',
+          'Email existant!',
+          'error'
+        );
+      }
+      else if (err.status==402){
+        Swal.fire(
+          'erreur!',
+          'Veuillez indiquer votre email esprit!',
+          'error'
+        );
+      }
 
-    })
+    }
+
+  )
 
   }
 

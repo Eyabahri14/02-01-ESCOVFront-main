@@ -71,3 +71,14 @@
 }
 
 
+@media  (max-width: 920px) {
+  .reservation-form #reservation-form button {
+    height: 3%;
+    width: 4px;
+    display: flex;
+    font-size: 7px;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+}

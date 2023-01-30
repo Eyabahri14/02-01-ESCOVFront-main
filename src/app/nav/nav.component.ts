@@ -1,13 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GoogleApiService, UserInfo } from "../google-api.service";
 import { UserService } from "../user.service";
+import {Router} from "@angular/router";
 
 
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
 
@@ -54,7 +55,7 @@ export class NavComponent implements OnInit {
     '#D813A9',
   ];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,private router:Router) { }
 
   ngOnInit(): void {
 
@@ -134,11 +135,9 @@ export class NavComponent implements OnInit {
     if (this.username) {
       this.deconnexion = true;
     }
-    else {
-      this.deconnexion = false;
-    }
 
 
+    console.log(this.deconnexion)
   }
 
 
@@ -160,6 +159,17 @@ export class NavComponent implements OnInit {
     }
 
     this.initials = initials;
+  }
+
+  logoutUser() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('contact');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
+    localStorage.removeItem('idUser');
+    this.deconnexion=false;
+    console.log((this.deconnexion))
+    this.router.navigate(['/home'])
   }
 
 

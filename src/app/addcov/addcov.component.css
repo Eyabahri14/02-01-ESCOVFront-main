@@ -70,4 +70,23 @@
     background: #82CCC8;
 }
 
- 
+ .btnPrecedent{
+   width: 30%;
+   margin-right: 10%;
+   margin-left: 15%;
+   color:red;
+ }
+ .btnSuivant{
+   width: 30%
+ }
+@media  (max-width: 920px) {
+  .reservation-form #reservation-form button {
+    height: 3%;
+    width: 4px;
+    display: flex;
+    font-size: 7px;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+}

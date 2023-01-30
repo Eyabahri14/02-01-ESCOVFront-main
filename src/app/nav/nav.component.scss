@@ -1,11 +1,6 @@
 
-@font-face{
-  font-family: "Kanit";
-  src:url("src/assets/fonts/Kanit/Kanit-Bold.ttf")format("ttf");
-
-}
 *{
-  font-family: Kanit;
+
 }
 
 
@@ -303,4 +298,21 @@ nav {
 .dropstyle{
   border-radius: 100px;
   width:50%;
+}
+
+ul {
+  @if deconnexion==true {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    bottom: 9px;
+  }
+  @if deconnexion!=true{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    bottom: 5px;
+  }
 }

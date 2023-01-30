@@ -15,6 +15,8 @@
       <input   formControlName="email"  required  type="email" placeholder="email" name="p"   />
       <div *ngIf="userRegister.controls.email.invalid && userRegister.controls.email.touched">
         <small *ngIf="userRegister.controls.email.errors?.['required']" class="text-danger"> l'email est obilgatoire</small>
+        <small *ngIf="userRegister.controls.email.errors?.['pattern'] " class="text-danger"> email esprit est obligatoire </small>
+
       </div>
 
 
@@ -38,19 +40,28 @@
     </form>
   </div>
   <div class="form-container sign-in-container">
-    <form [formGroup]="userLogin">
+    <form [formGroup]="userLogin" (ngSubmit)="userLogin">
       <h1>Connectez vous</h1>
 
 <br>
       <input   formControlName="email"   type="text" placeholder="Email" name="email"  />
-      <input   formControlName="password"    type="password" placeholder="Password" name="p"   />
+      <div *ngIf="userLogin.controls.email.invalid && userLogin.controls.email.touched">
+        <small *ngIf="userLogin.controls.email.errors?.['required']" class="text-danger"> l'email est obilgatoire</small>
+        <small *ngIf="userLogin.controls.email.errors?.['pattern'] " class="text-danger"> email esprit est obligatoire </small>
 
+      </div>
+      <input   formControlName="password"    type="password" placeholder="Password" name="password"   />
+      <div *ngIf="userLogin.controls.password.invalid && userLogin.controls.password.touched">
+        <small *ngIf="userLogin.controls.email.errors?.['required']" class="text-danger"> le mot de passe est obilgatoire</small>
+
+
+      </div>
       <a routerLink="/reset"  style=" background-color: transparent;
       border: none;
       font-weight: 600;
       color: #3DAFE1;
       cursor: pointer;">Vous avez oublié votre mot de passe?</a>
-      <button class="btnn" (click)="login()" >Connexion</button>
+      <button class="btnn"  [disabled]="userLogin.invalid" (click)="login()" >Connexion</button>
     </form>
   </div>
   <div class="overlay-container">
@@ -64,7 +75,7 @@
         <h1>Hello, Friend!</h1>
         <br>
 
-        <button class="ghost" id="signUp"><div >Sign Up </div></button>
+        <button class="ghost" id="signUp" ><div >Sign Up </div></button>
       </div>
     </div>
   </div>

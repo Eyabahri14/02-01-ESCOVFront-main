@@ -85,7 +85,8 @@ $red: #EF5350;
   margin: 0;
   margin-right: 10%;
   margin-bottom: 10%;
-border: 5px;
+  border: 5px ;
+
   &.active {
     transition: margin $cardAnimStep1 * 0.8;
   }
@@ -122,7 +123,7 @@ border: 5px;
     margin-bottom: $cardMrgBtm;
   }
 
-  &.hidden-hack {
+  &.-hack {
     .card__part-2 > .m--front {
       display: none;
     }
@@ -170,7 +171,7 @@ border: 5px;
       height: 100%;
       border-radius: inherit;
       background: #fff;
-      backface-visibility: hidden;
+
       transform-style: preserve-3d;
 
       &.m--back {
@@ -207,7 +208,7 @@ border: 5px;
       transition: transform $cardAnimStep1 ease-out, border-radius $cardAnimStep1/2;
 
       > .m--back {
-        overflow: hidden;
+
         cursor: pointer;
       }
 
@@ -325,7 +326,7 @@ border: 5px;
     }
 
     &__inner {
-      overflow: hidden;
+
       position: relative;
       height: 100%;
       border-radius: inherit;
@@ -334,7 +335,7 @@ border: 5px;
   }
 
   &__text {
-    overflow: hidden;
+
     position: absolute;
     top: 0;
     width: 50%;
@@ -658,7 +659,7 @@ border: 5px;
 
   &__map {
     display: none;
-    overflow: hidden;
+
     z-index: -1;
     position: absolute;
     left: 0;
@@ -711,10 +712,6 @@ border: 5px;
     .card.req-active2 & {
       height: $cardHeight;
     }
-    app-nav {
-      z-index: 1;
-      position: relative;
-    }
 
     &:after {
       content: "";
@@ -749,7 +746,7 @@ border: 5px;
     }
 
     &__img-cont {
-      overflow: hidden;
+
       display: inline-block;
       vertical-align: top;
       width: 50px;
@@ -769,7 +766,7 @@ border: 5px;
     }
 
     &__name-and-rating {
-      overflow: hidden;
+
       display: inline-block;
       vertical-align: top;
       max-width: 180px;
@@ -799,15 +796,7 @@ border: 5px;
         opacity: 0.3;
       }
 
-      @for $i from 1 through 5 {
-        &-#{$i} {
-          @for $j from 1 through $i {
-            .card__sender__rating__star:nth-child(#{$j}) {
-              opacity: 1;
-            }
-          }
-        }
-      }
+
 
       &__count {
         font-size: 12px;
@@ -830,7 +819,7 @@ border: 5px;
   }
 
   &__receiver {
-    overflow: hidden;
+
     position: relative;
     width: 100%;
     height: 0;
@@ -1019,16 +1008,46 @@ border: 5px;
 
 
 }
+
+
 .size{
   width: 20%;
   margin-right: 2%;
 }
 
+
+
+.finally{
+  width:30%;
+  margin-right: 3%;
+}
+
 @media  (max-width: 920px) {
+  *, *:before, *:after {
+
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
+  }
   .size {
     padding-bottom: 3%;
     width:100%
   }
+  .finally{
+    width:300px;
+    margin-right: 3%;
 
+  }
+  .card__face__from-to{
+    osition: absolute;
+    left: 120px;
+    top: 20px;
+    width: 500px;
+    color: #555A5F;
+    font-size: 13px;
+  }
 
 }

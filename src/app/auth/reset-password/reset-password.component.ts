@@ -12,8 +12,7 @@ import { AuthService } from "../../auth.service";
 export class ResetPasswordComponent implements OnInit {
   email:any;
   resetForm= new FormGroup({
-    email : new FormControl('',[Validators.required]),
-
+    email : new FormControl('',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]+\.[a-zA-Z0-9]+@esprit\.tn$/)])
   })
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -36,9 +35,16 @@ export class ResetPasswordComponent implements OnInit {
       }
 
     }, (err) => {
-      console.log(err);
+      if (err.status==400) {
+        Swal.fire(
+          'erreur!',
+          'Cet utilisateur existe pas !',
+          'error'
+        );
+      }
 
-    })
+    }
+    )
 
   }
 
