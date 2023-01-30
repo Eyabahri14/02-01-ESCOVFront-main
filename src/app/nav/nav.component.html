@@ -29,7 +29,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  bottom: 14px;">
+  bottom: 9px;">
     <!--  <li> <a href="index.html" class="logo">
         <h1 style="color: white;padding-top: 4%;font-size: 35px">ESCOV</h1>
       </a></li>
@@ -37,14 +37,14 @@
 
 
       <li style="font-family: Kanit"><a routerLinkActive="active" routerLink="/home"><strong>Home</strong></a></li>
-      <li><a routerLinkActive="active" routerLink="/addcov">
+      <li><a routerLinkActive="active" routerLink="/covoiturage">
         <i class="fa-solid fa-plus"></i>
        <strong> Publier un trajet</strong></a></li>
 
 
-      <li *ngIf="deconnexion==false">
+      <li *ngIf="deconnexion!=true" >
 
-        <a routerLinkActive="active" routerLink="/about">Se connecter</a>
+        <a routerLinkActive="active" routerLink="/login-register" ><strong>Se connecter</strong></a>
       </li>
 
       <li  *ngIf="deconnexion==true" class="nav-item dropdown">
@@ -62,7 +62,7 @@
         <div class="dropdown-menu dropdown-menu-end dropstyle" >
           <a routerLink="/profile" style="color:black ; font-size:  17px;display: flex;justify-content: center;border-radius: 100px" class="dropdown-item">Profile</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" style="color:black; font-size: 17px;display: flex;justify-content:center ;border-radius: 100px">Déconnexion</a>
+          <a class="dropdown-item" style="color:black; font-size: 17px;display: flex;justify-content:center ;border-radius: 100px"(click)="logoutUser()">Déconnexion</a>
         </div>
       </li>
 

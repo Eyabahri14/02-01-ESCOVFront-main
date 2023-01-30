@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   to: string = " ";
   nodata: boolean = false;
   Cov: any = [];
+  data: any;
 
   add = new FormGroup({
     date: new FormControl('', Validators.required),
@@ -47,9 +48,10 @@ export class HomeComponent implements OnInit {
     { item_id: 6, item_text: 'ghazela' },
     { item_id: 7, item_text: 'ariena' },
   ];
-  constructor(private spinner: NgxSpinnerService, private route: ActivatedRoute, private router: Router, private api: PublicationserviceService) { }
+  constructor( private spinner: NgxSpinnerService, private route: ActivatedRoute, private router: Router, private api: PublicationserviceService) { }
 
   ngOnInit(): void {
+
 
     window.scrollTo(0, 0);
     this.spinner.show();
@@ -127,7 +129,7 @@ export class HomeComponent implements OnInit {
     //console.log(this.from);
     //console.log(this.to);
     //  console.log(this.add.value.date);
-    this.router.navigate(['/displayCov/', this.from, this.to, this.add.value.date]);
+    this.router.navigate(['/Covoiturage/', this.from, this.to, this.add.value.date]);
 
 
 

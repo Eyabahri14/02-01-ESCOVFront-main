@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { EncryptionServiceService } from './encryption-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,11 @@ export class AuthService {
   public avail: boolean = false;
   public msg: string = "";
   public count :any;
+  public data :any;
   //private baseUri: string =environment.heroku ? "https://appcanteen.herokuapp.com":"http://localhost:3000";
   private baseUri: string = "http://localhost:3000/api/auth";
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private encryptionService: EncryptionServiceService,private http: HttpClient, private router: Router) { }
 
 
   register(body: any) {
@@ -36,14 +38,13 @@ export class AuthService {
   }
 
   getToken() {
-    return localStorage.getItem('token')
-  }
+    this.data = this.encryptionService.decrypt(localStorage.getItem('data')!);
+    console.log(this.data);
+    return !!this.data["token"];  }
 
   logoutUser() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userid');
-    localStorage.removeItem('admin');
-    localStorage.removeItem('user');
+    localStorage.removeItem('data');
+ 
     this.router.navigate(['/'])
   }
 

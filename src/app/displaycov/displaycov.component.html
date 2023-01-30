@@ -48,8 +48,8 @@
                     </div>
                     <div class="col-lg-2" class="size">
                       <fieldset>
-                        <input type="date" id="start" [(ngModel)]="date" formControlName="date" name="trip-start"
-                          value="2018-07-22" class="da">
+                        <input type="date" id="start" formControlName="date" name="trip-start" value="2018-07-22"
+                               class="da">
                       </fieldset>
                     </div>
                     <div class="col-lg-1">
@@ -96,59 +96,60 @@
 
               </div>
               <div class="row justify-content-left">
+                <div *ngFor="let p of Cov| paginate: { itemsPerPage: 8, currentPage: p } ;let j = index;"
+                     class="col-lg-12 col-sm-12" class="finally" >
 
-                <div *ngFor="let p of Cov  | paginate: { itemsPerPage: 8, currentPage: p }  ;let j = index;"
-                  class="col-lg-12 col-sm-12" style="width:30%;margin-right: 3%; ">
-
-
-
-                  <section class="card theme-green">
-                    <div class="card__map">
-                      <div class="card__map__inner">
-
+                  <div div="card-container" class="card-container">
+                    <section class="card theme-green">
+                      <div class="card__map">
+                        <div class="card__map__inner"></div>
 
                       </div>
-                    </div>
 
-                    <section class="card__part card__part-2">
+                      <section class="card__part card__part-2">
 
-                      <div class="card__part__side m--back">
+                        <div class="card__part__side m--back">
 
-                        <div class="card__part__inner card__face">
+                          <div class="card__part__inner card__face">
 
-                          <div class="card__face__colored-side"></div>
-                          <h3 class="card__face__price">{{p.prix}} Dt</h3>
-                          <div class="card__face__divider">
-                          </div>
-                          <div class="card__face__path">
-                          </div>
-                          <div class="card__face__from-to">
-                            <p>Départ : {{p.from}}</p>
-                            <p>Arrivé : {{p.to}}</p>
-                          </div>
-                          <div class="card__face__deliv-date">
-                            Heure
-                            <p>{{p.heure}}</p>
-                          </div>
-                          <div class="card__face__stats card__face__stats--req">
-                            Username
-                            <p>{{p.user.username}}</p>
-                          </div>
-                          <div class="card__face__stats card__face__stats--pledge">
-                            En demande
-                            <p>{{p.isdemand}}</p>
+
+                            <div class="card__face__colored-side"></div>
+                            <h3 class="card__face__price">{{p.prix}} Dt</h3>
+                            <div class="card__face__divider">
+                            </div>
+                            <div class="card__face__path">
+                            </div>
+                            <div class="card__face__from-to">
+                              <p>{{p.from}}</p>
+                              <p>{{p.to}}</p>
+                            </div>
+                            <div class="card__face__deliv-date">
+                              Heure
+                              <p>{{p.heure}}</p>
+                            </div>
+                            <div class="card__face__stats card__face__stats--req">
+                              Date
+                              <p style="font-size: 12px;">{{p.date}}</p>
+                            </div>
+                            <div class="card__face__stats card__face__stats--pledge">
+                              Télephone
+                              <p style="font-size: 12px;">{{p.contact}}</p>
+                            </div>
+
+
+
                           </div>
 
                         </div>
-                      </div>
-
+                      </section>
                     </section>
-                  </section>
 
-
+                  </div>
                 </div>
-
               </div>
+
+
+
               <br>
               <div *ngIf="nodata==true ">
 

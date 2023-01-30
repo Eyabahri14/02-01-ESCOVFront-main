@@ -1,0 +1,65 @@
+<div class="reservation-form2 " style=" margin-bottom:02%;margin-top: 04%">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <form id="reservation-form2" [formGroup]="add" (ngSubmit)="addData()" name="gs" method="submit"
+                    role="search" action="#">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4>Editer votre <em> profile </em></h4>
+                        </div>
+                        <div class="row" style="margin-bottom: 5%;">
+                            <div class="col-lg-6">
+                                <fieldset>
+                                    <label class="form-label">Username</label>
+                                    <input style="margin-bottom:0%" formControlName="username" type="text" name="Name"
+                                        placeholder="Ex. John Smithee" autocomplete="on"
+                                        required="">
+
+                                </fieldset>
+
+                                <div *ngIf="add.controls.username.invalid && add.controls.username.touched">
+                                    <small *ngIf="add.controls.username.errors?.['required']" class="text-danger"> name is
+                                        required</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <fieldset>
+                                    <label class="form-label">Your Phone Number</label>
+                                    <input style="margin-bottom:0%" formControlName="contact" required maxlength="8"
+                                        minlength="8" type="text" name="Number"  
+                                        (input)="numbersOnlyValidator($event)" class="Number"
+                                        placeholder="Ex. +216 xx xxx xxx" autocomplete="on" required="">
+                                </fieldset>
+
+                                <div *ngIf="add.controls.contact.invalid && add.controls.contact.touched">
+                                    <small *ngIf="add.controls.contact.errors?.['required'] " class="text-danger"> number
+                                        is required</small>
+                                    <small *ngIf="add.controls.contact.errors?.['minlength'] " class="text-danger">
+                                        minimum 8 numbers
+                                    </small>
+                                    <small *ngIf="add.controls.contact.errors?.['maxlength'] " class="text-danger">
+                                        maximum 8 numbers
+                                    </small>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <p style="color: red;" *ngIf="add.hasError('yourErrorName')">*Please fill all the form!</p>
+
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <button [disabled]="!add.valid" class="main-button">Confirmer</button>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    <br>
+</div>

@@ -89,3 +89,23 @@
   height: 40px !important;
 
 }
+
+@media  (max-width: 920px) {
+
+
+.da{
+  display: inline-block;
+  justify-content: left !important; 
+  align-items: left !important;
+  border: 0.5px solid #ffffff !important;
+  padding: 6px 0px !important;
+  margin-bottom: 0 !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 0.8 !important;
+ /* text-align: left !important; */
+  border-radius:18px !important;
+  background-color: #ffffff !important;
+
+}
+}

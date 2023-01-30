@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
+import { EncryptionService } from 'encrypt-webstorage';
 import { AuthService } from "../../auth.service";
 
 @Component({
@@ -33,15 +34,16 @@ export class ResetComponent implements OnInit {
   })
   taa: string = "";
   otpverified: boolean = false;
-  email:string="";
-  constructor(private router: Router, private authService: AuthService) { }
+  email: string = "";
+  constructor(private router: Router, private authService: AuthService, private activtedRoute: ActivatedRoute ) { }
 
   ngOnInit(): void {
     this.email = localStorage.getItem('email')!;
+   
 
   }
 
-
+ 
   otpfct() {
     this.taa = this.otp.value.otp1! + this.otp.value.otp2! + this.otp.value.otp3! + this.otp.value.otp4!;
     this.resetForm.controls.otp.setValue(this.taa);
@@ -71,7 +73,7 @@ export class ResetComponent implements OnInit {
       console.log(err);
     })
   }
-  redirect(){
+  redirect() {
     this.router.navigate(['/reset'])
 
   }
@@ -92,9 +94,9 @@ export function matchValidator(
       return null;
     }
     return !!control.parent &&
-    !!control.parent.value &&
-    control.value ===
-    (control.parent?.controls as any)[matchTo].value
+      !!control.parent.value &&
+      control.value ===
+      (control.parent?.controls as any)[matchTo].value
       ? null
       : { matching: true };
   };

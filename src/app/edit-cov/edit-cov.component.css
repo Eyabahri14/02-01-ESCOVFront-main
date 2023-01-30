@@ -71,3 +71,39 @@
 }
 
 
+.button2  {
+  display: inline-block !important;
+  padding: 1rem 1rem !important;
+  border-radius: 1rem !important;
+  background-color: red !important;
+  color: white !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  transition: background-color 0.2s ease !important;
+  position: relative !important;
+  width :2px ;
+  height: 4px;
+}
+.icon2 {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+.buttondesign{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 45%
+}
+
+@media  (max-width: 920px) {
+  .buttondesign{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 35%;
+    margin-bottom:5%;
+  }
+}

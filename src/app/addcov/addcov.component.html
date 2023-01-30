@@ -28,7 +28,7 @@
             <div class="col-lg-6">
               <fieldset>
                 <label class="form-label">Your Name</label>
-                <input style="margin-bottom:0%" formControlName="name" type="text" name="Name" formControlName="name"
+                <input style="margin-bottom:0%" formControlName="username" type="text" name="Name" 
                        placeholder="Ex. John Smithee" autocomplete="on" required="">
                 <!-- <div class="form-control-feedback"
               *ngIf="add.controls.name.errors && (add.controls.name.dirty || add.controls.name.touched) ">
@@ -37,23 +37,23 @@
                 </div> -->
               </fieldset>
 
-              <div *ngIf="add.controls.name.invalid && add.controls.name.touched">
-                <small *ngIf="add.controls.name.errors?.['required']" class="text-danger"> name is required</small>
+              <div *ngIf="add.controls.username.invalid && add.controls.username.touched">
+                <small *ngIf="add.controls.username.errors?.['required']" class="text-danger"> name is required</small>
               </div>
             </div>
             <div class="col-lg-6">
               <fieldset>
                 <label class="form-label">Your Phone Number</label>
-                <input style="margin-bottom:0%" formControlName="number" required maxlength="8" minlength="8"
-                       type="text" name="Number" formControlName="number" (input)="numbersOnlyValidator($event)"
+                <input style="margin-bottom:0%" formControlName="contact" required maxlength="8" minlength="8"
+                       type="text" name="Number"   (input)="numbersOnlyValidator($event)"
                        class="Number" placeholder="Ex. +216 xx xxx xxx" autocomplete="on" required="">
               </fieldset>
 
-              <div *ngIf="add.controls.number.invalid && add.controls.number.touched">
-                <small *ngIf="add.controls.number.errors?.['required'] " class="text-danger"> number is required</small>
-                <small *ngIf="add.controls.number.errors?.['minlength'] " class="text-danger"> minimum 8 numbers
+              <div *ngIf="add.controls.contact.invalid && add.controls.contact.touched">
+                <small *ngIf="add.controls.contact.errors?.['required'] " class="text-danger"> number is required</small>
+                <small *ngIf="add.controls.contact.errors?.['minlength'] " class="text-danger"> minimum 8 numbers
                 </small>
-                <small *ngIf="add.controls.number.errors?.['maxlength'] " class="text-danger"> maximum 8 numbers
+                <small *ngIf="add.controls.contact.errors?.['maxlength'] " class="text-danger"> maximum 8 numbers
                 </small>
 
               </div>
@@ -209,7 +209,7 @@
           <div class=" row-lg-12" style="margin-top: 30px;">
             <fieldset>
               <button style="width: 30%;margin-right: 10%;margin-left: 15%;" type="button" (click)="goBack()" >Précedent</button>
-              <button style="width: 30%" class="main-button"  [disabled]="!add3.valid">Suivant</button>
+              <button style="width: 30%" class="main-button"  [disabled]="!add3.valid">Confirmer</button>
 
             </fieldset>
           </div>

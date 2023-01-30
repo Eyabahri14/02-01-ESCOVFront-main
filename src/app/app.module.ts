@@ -32,6 +32,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {LayoutModule} from "@angular/cdk/layout";
 import { ButtonComponent } from './button/button.component';
+import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
+import { EditprofileComponent } from './editprofile/editprofile.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { ButtonComponent } from './button/button.component';
     ProfileAuthComponent,
     EditCovComponent,
     ButtonComponent,
+    EditprofileComponent,
 
   ],
   imports: [
@@ -67,7 +70,9 @@ import { ButtonComponent } from './button/button.component';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    LayoutModule
+    LayoutModule,
+    NgxGoogleAnalyticsModule.forRoot('G-P6VJHWJ1EL')
+
 
 
 

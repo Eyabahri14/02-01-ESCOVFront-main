@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GoogleApiService, UserInfo } from "../google-api.service";
 import { UserService } from "../user.service";
+import { EncryptionServiceService } from '../encryption-service.service';
+import { Router } from '@angular/router';
 
 
 
@@ -18,6 +19,7 @@ export class NavComponent implements OnInit {
   public photoUrl: any;
 
   public name: any;
+  public data: any;
 
   public showInitials = false;
   public initials: any;
@@ -54,24 +56,27 @@ export class NavComponent implements OnInit {
     '#D813A9',
   ];
 
-  constructor(private userService: UserService) { }
+  constructor(private router: Router, private encryptionService: EncryptionServiceService, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.data = this.encryptionService.decrypt(localStorage.getItem('data')!);
+    this.username = this.data["username"];
+    this.name = this.username;
 
+    if (this.username) {
+      this.deconnexion = true;
+
+    }
+    else {
+      console.log("no user");
+
+      this.deconnexion = false;
+    }
     $('.toggle').click(function () {
       "use strict";
       $('nav ul').slideToggle();
     });
 
-
-
-
-
-
-
-
-    this.username = localStorage.getItem('username');
-    this.name = this.username;
     if (!this.photoUrl) {
       this.showInitials = true;
       this.createInititals();
@@ -79,72 +84,68 @@ export class NavComponent implements OnInit {
       // const randomIndex = Math.floor(Math.random() * Math.floor(this.colors.length));
       if (this.initials[0] == "A")
         this.circleColor = this.colors[0];
-      if (this.initials[0] == "B")
+      else if (this.initials[0] == "B")
         this.circleColor = this.colors[1];
-      if (this.initials[0] == "C")
+      else if (this.initials[0] == "C")
         this.circleColor = this.colors[2];
-      if (this.initials[0] == "D")
+      else if (this.initials[0] == "D")
         this.circleColor = this.colors[3];
-      if (this.initials[0] == "E")
+      else if (this.initials[0] == "E")
         this.circleColor = this.colors[4];
-      if (this.initials[0] == "F")
+      else if (this.initials[0] == "F")
         this.circleColor = this.colors[5];
-      if (this.initials[0] == "G")
+      else if (this.initials[0] == "G")
         this.circleColor = this.colors[6];
-      if (this.initials[0] == "H")
+      else if (this.initials[0] == "H")
         this.circleColor = this.colors[7];
-      if (this.initials[0] == "I")
+      else if (this.initials[0] == "I")
         this.circleColor = this.colors[8];
-      if (this.initials[0] == "J")
+      else if (this.initials[0] == "J")
         this.circleColor = this.colors[9];
-      if (this.initials[0] == "K")
+      else if (this.initials[0] == "K")
         this.circleColor = this.colors[10];
-      if (this.initials[0] == "L")
+      else if (this.initials[0] == "L")
         this.circleColor = this.colors[11];
-      if (this.initials[0] == "M")
+      else if (this.initials[0] == "M")
         this.circleColor = this.colors[12];
-      if (this.initials[0] == "N")
+      else if (this.initials[0] == "N")
         this.circleColor = this.colors[13];
-      if (this.initials[0] == "O")
+      else if (this.initials[0] == "O")
         this.circleColor = this.colors[14];
-      if (this.initials[0] == "P")
+      else if (this.initials[0] == "P")
         this.circleColor = this.colors[15];
-      if (this.initials[0] == "Q")
+      else if (this.initials[0] == "Q")
         this.circleColor = this.colors[16];
-      if (this.initials[0] == "R")
+      else if (this.initials[0] == "R")
         this.circleColor = this.colors[17];
-      if (this.initials[0] == "S")
+      else if (this.initials[0] == "S")
         this.circleColor = this.colors[18];
-      if (this.initials[0] == "T")
+      else if (this.initials[0] == "T")
         this.circleColor = this.colors[19];
-      if (this.initials[0] == "U")
+      else if (this.initials[0] == "U")
         this.circleColor = this.colors[20];
-      if (this.initials[0] == "V")
+      else if (this.initials[0] == "V")
         this.circleColor = this.colors[21];
-      if (this.initials[0] == "W")
+      else if (this.initials[0] == "W")
         this.circleColor = this.colors[22];
-      if (this.initials[0] == "X")
+      else if (this.initials[0] == "X")
         this.circleColor = this.colors[23];
-      if (this.initials[0] == "Y")
+      else if (this.initials[0] == "Y")
         this.circleColor = this.colors[24];
-      if (this.initials[0] == "Z")
+      else if (this.initials[0] == "Z")
         this.circleColor = this.colors[25];
-    }
+      else {
+        this.circleColor = this.colors[26];
 
-    if (this.username) {
-      this.deconnexion = true;
+      }
     }
-    else {
-      this.deconnexion = false;
-    }
-
 
   }
 
 
   private createInititals(): void {
     let initials = "";
-
+    this.name = this.name.toUpperCase();
     for (let i = 0; i < this.name.length; i++) {
       if (this.name.charAt(i) === ' ') {
         continue;
@@ -153,14 +154,20 @@ export class NavComponent implements OnInit {
       if (this.name.charAt(i) === this.name.charAt(i).toUpperCase()) {
         initials += this.name.charAt(i);
 
-        if (initials.length == 2) {
+        if (initials.length == 1) {
           break;
         }
       }
     }
+    console.log(initials);
+
 
     this.initials = initials;
   }
-
+  logoutUser() {
+    localStorage.removeItem('data');
+    this.deconnexion = false;
+    this.router.navigate(['/home'])
+  }
 
 }
