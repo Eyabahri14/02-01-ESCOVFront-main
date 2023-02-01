@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { AuthService } from "../../auth.service";
 import { EncryptionService } from "encrypt-webstorage";
 import * as CryptoJS from 'crypto-js';
+import { EncryptionServiceService } from 'src/app/encryption-service.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -17,7 +18,7 @@ export class ResetPasswordComponent implements OnInit {
     email: new FormControl('', [Validators.required]),
 
   })
-  constructor(private router: Router, private authService: AuthService, private encryptor: EncryptionService) { }
+  constructor(private router: Router, private authService: AuthService,private encryptionService: EncryptionServiceService) { }
 
   ngOnInit(): void {
   }
@@ -25,10 +26,8 @@ export class ResetPasswordComponent implements OnInit {
   Reset() {
     this.authService.reset(this.resetForm.value).subscribe((res: any) => {
       console.log(this.resetForm.value)
-      let password = "mysecretkey";
-      let encrypted = CryptoJS.AES.encrypt(this.resetForm.value.email!, password);
-      console.log(encrypted.toString());
-      localStorage.setItem('email', encrypted.toString());
+       
+      localStorage.setItem('data', this.encryptionService.encrypt({  email: this.resetForm.value }));
 
       if (res) {
         Swal.fire(

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { EncryptionService } from 'encrypt-webstorage';
+import { EncryptionServiceService } from 'src/app/encryption-service.service';
 import { AuthService } from "../../auth.service";
 
 @Component({
@@ -34,20 +35,19 @@ export class ResetComponent implements OnInit {
   })
   taa: string = "";
   otpverified: boolean = false;
-  email: string = "";
-  constructor(private router: Router, private authService: AuthService, private activtedRoute: ActivatedRoute ) { }
+  data: any;
+  constructor(private router: Router, private authService: AuthService, private activtedRoute: ActivatedRoute, private encryptionService: EncryptionServiceService,) { }
 
   ngOnInit(): void {
-    this.email = localStorage.getItem('email')!;
-   
+    this.data = this.encryptionService.decrypt(localStorage.getItem('data')!);
 
   }
 
- 
+
   otpfct() {
     this.taa = this.otp.value.otp1! + this.otp.value.otp2! + this.otp.value.otp3! + this.otp.value.otp4!;
     this.resetForm.controls.otp.setValue(this.taa);
-    this.resetForm.controls.email.setValue(this.email); // to make it dynamic
+    this.resetForm.controls.email.setValue(this.data["email"]["email"]); // to make it dynamic
 
     this.authService.otp(this.resetForm.value).subscribe((res: any) => {
       console.log(res);
@@ -62,7 +62,7 @@ export class ResetComponent implements OnInit {
   }
   ResetPassword() {
 
-    this.resetForm.controls.email.setValue(this.email); // to make it dynamic
+    this.resetForm.controls.email.setValue(this.data["email"]["email"]); // to make it dynamic
 
     this.authService.resetpassworddone(this.resetForm.value).subscribe((res: any) => {
       console.log(res);

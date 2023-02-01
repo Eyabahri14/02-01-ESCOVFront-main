@@ -3,21 +3,19 @@ import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } fro
 import { EncryptionService } from 'encrypt-webstorage';
 import { Observable } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
+import { EncryptionServiceService } from './encryption-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OtpguardGuard implements CanActivate {
-  constructor(private encryptor: EncryptionService) { };
+  data: any;
+  constructor(private encryptionService: EncryptionServiceService,) { };
   validateId(route: any): Boolean {
-    const secret_key = "!!34fffd99kdsdnn@as"
-    console.log(route);
+ 
+console.log(route["email"]);
 
-    let password = "mysecretkey";
-    let decrypted = CryptoJS.AES.decrypt(route, password);
-    console.log(decrypted.toString(CryptoJS.enc.Utf8));
-
-    if (decrypted.toString(CryptoJS.enc.Utf8).indexOf("@esprit.tn") != -1) {
+    if (route["email"].indexOf("@esprit.tn") != -1) {
       console.log("mijoud");
 
       return true;
@@ -27,10 +25,12 @@ export class OtpguardGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const email = localStorage.getItem("email");
-console.log(email);
-
-    if (this.validateId(email) == true) {
+      console.log(localStorage.getItem('data'));
+      // slim.ayadi@esprit.tn
+    this.data = this.encryptionService.decrypt(localStorage.getItem('data')!);
+    console.log(this.data["email"]);
+    
+    if (this.validateId(this.data["email"]) == true) {
       console.log("mrigel");
       return true;
 
