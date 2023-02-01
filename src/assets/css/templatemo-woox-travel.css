@@ -160,6 +160,7 @@ body {
   -ms-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 
 }
 
@@ -1247,18 +1248,26 @@ Footer Style
 ---------------------------------------------
 */
 
-footer {
+/* footer {
   background-color: #7fc6a6;
   text-align: center;
   justify-content: center;
   align-items: center;
-  /* padding: 25px 0px; */
+  /* padding: 25px 0px; 
   height: 50px;
   position: relative;
   bottom: 0;
+} */
+
+footer {
+  height: 70px;;
+  clear:both;
+  position:relative;
+  bottom:0;
+  width: 100%;
+  background-color: #7fc6a6;
+
 }
-
-
 footer p {
   color: #fff;
   text-align: center;
@@ -1282,6 +1291,7 @@ footer p a:hover {
 }
 
 @media screen and (max-width: 950px) {
+
   footer {
     margin: 0;
     padding: 0;
@@ -1290,9 +1300,9 @@ footer p a:hover {
     justify-content: center;
     align-items: center;
     /* padding: 25px 0px; */
-    height: 50px;
+    height: 70px;
     position: relative;
-   
+   width: 100%;
     bottom: 0;
   }
 }

@@ -29,7 +29,7 @@
 }
 .city{
   height: 250px;
-  width: 500%;
+  width: 150%;
   background-image: url("../../assets/images/car/city.png");
   position: absolute;
   bottom: 200px;

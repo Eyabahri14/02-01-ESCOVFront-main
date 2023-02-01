@@ -17,7 +17,7 @@ import { ButtonComponent } from "./button/button.component";
 import { OtpguardGuard } from './otpguard.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login-register', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'Covoiturage/:from/:to/:date', component: DisplaycovComponent },
   { path: 'covoiturage', canActivate: [LoginGuard], component: AddcovComponent },
@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'resetPassword', canActivate: [OtpguardGuard], component: ResetComponent },
   { path: 'covoiturage/:id', canActivate: [LoginGuard], component: EditCovComponent },
   { path: 'button', component: ButtonComponent },
+  { path: '**', redirectTo: 'home' }
 ];
 
 

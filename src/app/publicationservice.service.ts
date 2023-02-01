@@ -10,15 +10,15 @@ export class PublicationserviceService {
   data: any;
   token: any;
   constructor(private encryptionService: EncryptionServiceService, private http: HttpClient) {
-    this.data = this.encryptionService.decrypt(localStorage.getItem('data')!);
-    this.token = this.data["token"];
+  
   }
   public Search(Data: any) {
     return this.http.post(environment.api + '/api/publications/search', Data);
   }
 
   public Add(Data: any) {
-
+    this.data = this.encryptionService.decrypt(localStorage.getItem('data')!);
+    this.token = this.data["token"];
 
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -36,6 +36,8 @@ export class PublicationserviceService {
     return this.http.get(environment.api + `/api/publications/${data}`);
   }
   public delete(data: any) {
+    this.data = this.encryptionService.decrypt(localStorage.getItem('data')!);
+    this.token = this.data["token"];
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'responseType': 'json',
@@ -45,6 +47,8 @@ export class PublicationserviceService {
     return this.http.delete(environment.api + `/api/publications/${data}`, { headers: headers });
   }
   public update(id: any, data: any) {
+    this.data = this.encryptionService.decrypt(localStorage.getItem('data')!);
+    this.token = this.data["token"];
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'responseType': 'json',

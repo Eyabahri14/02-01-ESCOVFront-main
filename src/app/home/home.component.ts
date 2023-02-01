@@ -99,45 +99,11 @@ export class HomeComponent implements OnInit {
       .start()
 
   }
-  selectEvent(item: any) {
-    // do something with selected item
-    this.from = item.name;
-    // console.log(this.from);
 
-  }
-  selectEvent2(item: any) {
-    // do something with selected item
-    this.to = item.name;
-    // console.log(this.to);
-  }
-  addData() {
-    //  console.log(this.add.value.date);
-    if (Array.isArray(this.add.value.from)) {
-      this.add.value.from?.forEach((element, index) => {
-        this.from = (element['item_text']);
-
-      });
-    }
-
-    // console.log(this.from);
-    if (Array.isArray(this.add.value.to)) {
-      this.add.value.to?.forEach((element, index) => {
-        this.to = (element['item_text']);
-
-      });
-    }
-    //console.log(this.from);
-    //console.log(this.to);
-    //  console.log(this.add.value.date);
-    this.router.navigate(['/Covoiturage/', this.from, this.to, this.add.value.date]);
-
-
-
-  }
+ 
   loaddata() {
     this.api.latest().subscribe((res: any) => {
-      // console.log("hhh");
-      // console.log(res);
+
       this.Cov = res
 
       if (this.Cov.length == 0) {
@@ -145,6 +111,26 @@ export class HomeComponent implements OnInit {
       }
 
     })
+  }
+  addData() {
+    if (Array.isArray(this.add.value.from)) {
+      this.add.value.from?.forEach((element, index) => {
+        this.from = (element['item_text']);
+
+      });
+    }
+
+    if (Array.isArray(this.add.value.to)) {
+      this.add.value.to?.forEach((element, index) => {
+        this.to = (element['item_text']);
+
+      });
+    }
+
+    this.router.navigate(['/Covoiturage/', this.from, this.to, this.add.value.date]);
+
+
+
   }
 
 }
