@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
-import { EncryptionService } from 'encrypt-webstorage';
 import { EncryptionServiceService } from 'src/app/encryption-service.service';
 import { AuthService } from "../../auth.service";
 
