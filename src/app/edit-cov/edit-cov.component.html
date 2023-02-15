@@ -10,29 +10,27 @@
 
       <div class="col-lg-12">
         <form [formGroup]="add" (ngSubmit)="addData()" id="reservation-form" name="gs" method="submit"
-              *ngIf=" step == 0 ">
+          *ngIf=" step == 0 ">
 
           <div class="row">
             <div class="col-lg-12">
               <div class="row">
 
-                <button title="supprimer posts" (click)="delete()"
-                        style="border:0px;background-color:#dc3545 ;width: 30px;height:33px;padding: 6px 6px;margin-right: 03%;margin-top: 04%;margin-left: 80%;"
-                        class="some-button" type="button">
+                <div class="buttondesign">
+                  <a class="button2" (click)="delete()">
+                    <span class="icon2"><i class="fas fa-trash"></i></span> </a>
+                  <div style="margin-left: 2%"></div>
+                  <a class="button2" (click)="disable()">
+                    <span class="icon2">
+                      <i *ngIf="disabled==false" class="fa-solid fa-eye-slash"></i>
+                      <i *ngIf="disabled==true" class="fa-solid fa-eye"></i>
+                    </span>
 
-                  <i class="fa-solid fa-trash"></i>
-
-                </button>
-                <button    title="{{disabled_texte}}" (click)="disable()"
-                           style="border:0px;background-color:#dc3545 ;width: 30px;height:33px;padding: 6px 6px;margin-top: 04%;"
-                           class="some-button" type="button">
-
-                  <i *ngIf="disabled==false" class="fa-solid fa-eye-slash"></i>
-                  <i *ngIf="disabled==true" class="fa-solid fa-eye"></i>
-                </button>
+                  </a>
+                </div>
 
               </div>
-              <h4>Editez <em> Votre</em> Trajet <em> :</em></h4>
+              <h4>Editez <em> Votre</em> Trajet  </h4>
               <div class=" progress-wrap" style="margin-bottom: 50px;">
                 <div class="line-progress-bar">
                   <div class="line"></div>
@@ -49,7 +47,7 @@
               <fieldset>
                 <label class="form-label">Your Name</label>
                 <input value="aaa" style="margin-bottom:0%" formControlName="name" type="text" name="Name"
-                       formControlName="name" placeholder="Ex. John Smithee" autocomplete="on" required="">
+                  formControlName="name" placeholder="Ex. John Smithee" autocomplete="on" required="">
                 <!-- <div class="form-control-feedback"
               *ngIf="add.controls.name.errors && (add.controls.name.dirty || add.controls.name.touched) ">
               <p style="color: red;" *ngIf="add.controls.name.errors?.['required']">name is
@@ -65,9 +63,9 @@
               <fieldset>
                 <label class="form-label">Your Phone Number</label>
                 <input value="95590010" style="margin-bottom:0%" formControlName="number" required maxlength="8"
-                       minlength="8" type="text" name="Number" formControlName="number"
-                       (input)="numbersOnlyValidator($event)" class="Number" placeholder="Ex. +216 xx xxx xxx"
-                       autocomplete="on" required="">
+                  minlength="8" type="text" name="Number" formControlName="number"
+                  (input)="numbersOnlyValidator($event)" class="Number" placeholder="Ex. +216 xx xxx xxx"
+                  autocomplete="on" required="">
               </fieldset>
 
               <div *ngIf="add.controls.number.invalid && add.controls.number.touched">
@@ -83,9 +81,10 @@
             <br>
             <div class=" row-lg-12" style=" margin-top: 30px;display: flex;justify-content: center;align-items: center">
 
-              <button style="width:30%" (click)="goBack()" >Précedent</button>
-              <div style="margin-left:10%"></div>
-              <button style="width:30%"  [disabled]="!add.valid" >Suivant</button>
+
+              <button style="width: 30%;margin-right: 10%;margin-left: 15%;" type="button"
+                (click)="goBack()">Précedent</button>
+              <button style="width: 30%" class="main-button" [disabled]="!add.valid">Suivant</button>
 
 
             </div>
@@ -95,7 +94,7 @@
 
         </form>
         <form [formGroup]="add2" (ngSubmit)="addData()" id="reservation-form" name="gs" method="submit"
-              *ngIf=" step == 1 ">
+          *ngIf=" step == 1 ">
           <div class="col-lg-12">
             <h4>Partagez <em> Votre</em> Trajet <em> :</em></h4>
             <div class="progress-wrap" style="margin-bottom: 50px;">
@@ -116,8 +115,8 @@
                 <label class="form-label">Départ</label>
 
                 <ng-multiselect-dropdown [placeholder]="'place'" class="custom-font-sizeee"
-                                         [settings]="dropdownSettings" [data]="dropdownList" formControlName="from"
-                                         [(ngModel)]="selectedItems">
+                  [settings]="dropdownSettings" [data]="dropdownList" formControlName="from"
+                  [(ngModel)]="selectedItems">
                 </ng-multiselect-dropdown>
 
               </fieldset>
@@ -132,7 +131,7 @@
               <fieldset>
                 <label class="form-label">Destination</label>
                 <ng-multiselect-dropdown class="custom-font-sizeee" [placeholder]="'to'" [settings]="dropdownSettings"
-                                         [data]="dropdownList" formControlName="to" [(ngModel)]="selectedItems2">
+                  [data]="dropdownList" formControlName="to" [(ngModel)]="selectedItems2">
                 </ng-multiselect-dropdown>
                 <div *ngIf="add2.controls.to.invalid && add2.controls.to.touched">
                   <small *ngIf="add2.controls.to.errors?.['required']" class="text-danger">veuillez indiquez votre
@@ -143,19 +142,19 @@
           </div>
           <p style="color: red;" *ngIf="add.hasError('yourErrorName')">*Please fill all the form!</p>
 
-          <div class=" row-lg-12" style=" margin-top: 30px;display: flex;justify-content: center;align-items: center">
 
-            <button style="width:30%" (click)="goBack()" >Précedent</button>
-            <div style="margin-left:10%"></div>
-            <button style="width:30%"  [disabled]="!add.valid" >Suivant</button>
-
-
+          <div class="col-lg-12" style="margin-top: 30px;">
+            <fieldset>
+              <button style="width: 30%;margin-right: 10%;margin-left: 15%;" type="button"
+                (click)="goBack()">Précedent</button>
+              <button style="width: 30%" class="main-button" [disabled]="!add2.valid">Suivant</button>
+            </fieldset>
           </div>
 
 
         </form>
         <form [formGroup]="add3" (ngSubmit)="addData()" id="reservation-form" name="gs" method="submit"
-              *ngIf=" step == 2 ">
+          *ngIf=" step == 2 ">
           <div class="col-lg-12">
             <h4>Partagez <em> Votre</em> Trajet <em> :</em></h4>
             <div class="progress-wrap" style="margin-bottom: 50px;">
@@ -175,7 +174,7 @@
               <fieldset>
                 <label class="form-label">Nombre de place</label>
                 <input style="margin-bottom:0%" type='number' name="Name" formControlName="nbplace" required max="7"
-                       min=0 class="Name" placeholder="Ex. 2 or 3 or 4">
+                  min=0 class="Name" placeholder="Ex. 2 or 3 or 4">
 
               </fieldset>
               <div *ngIf="add3.controls.nbplace.invalid && add3.controls.nbplace.touched">
@@ -192,7 +191,7 @@
                 <label class="form-label">Check In Date</label>
                 <!-- datetime-local -->
                 <input (input)="dateValidator($event)" style="margin-bottom:0%" [(ngModel)]="date"
-                       formControlName="date" type="datetime-local" name="date">
+                  formControlName="date" type="datetime-local" name="date">
               </fieldset>
 
               <div *ngIf="add3.controls.date.invalid && add3.controls.date.touched">
@@ -200,6 +199,7 @@
                   obligatoire</small>
                 <small *ngIf="add3.controls.date.errors?.['invalidDate']" class="text-danger">Veuillez mettre une date
                   correcte</small>
+
               </div>
 
             </div>
@@ -210,7 +210,7 @@
               <fieldset>
                 <label class="form-label">Prix</label>
                 <input style="margin-bottom:0%" min=0 formControlName="price" type='number' name="Name" class="Name"
-                       placeholder="Ex. 12dt">
+                  placeholder="Ex. 12dt">
               </fieldset>
 
               <div *ngIf="add3.controls.price.invalid && add3.controls.price.touched">
@@ -222,20 +222,20 @@
               <fieldset>
                 <label class="form-label">Additional information</label>
                 <input style="margin-bottom:0%" formControlName="description" type='text' name="Name" class="Name"
-                       placeholder="Ex. points communes">
+                  placeholder="Ex. points communes">
               </fieldset>
             </div>
           </div>
           <br>
           <p style="color: red;" *ngIf="add.hasError('yourErrorName')">*Please fill all the form!</p>
 
-          <div class=" row-lg-12" style=" margin-top: 30px;display: flex;justify-content: center;align-items: center">
 
-            <button style="width:30%" (click)="goBack()" >Précedent</button>
-            <div style="margin-left:10%"></div>
-            <button style="width:30%"  [disabled]="!add.valid" >Suivant</button>
-
-
+          <div class=" row-lg-12" style="margin-top: 30px;">
+            <fieldset>
+              <button style="width: 30%;margin-right: 10%;margin-left: 15%;" type="button"
+                (click)="goBack()">Précedent</button>
+              <button style="width: 30%" class="main-button" [disabled]="!add3.valid">Suivant</button>
+            </fieldset>
           </div>
 
 

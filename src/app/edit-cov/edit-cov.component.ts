@@ -6,6 +6,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import * as moment from 'moment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { EncryptionServiceService } from '../encryption-service.service';
 @Component({
   selector: 'app-edit-cov',
   templateUrl: './edit-cov.component.html',
@@ -42,54 +43,45 @@ export class EditCovComponent implements OnInit {
   from: string = "";
   to: string = "";
   add = new FormGroup({
-      name: new FormControl('', Validators.required),
-      number: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
+    name: new FormControl('', Validators.required),
+    number: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
 
-    },
+  },
   )
   add2 = new FormGroup({
 
-      from: new FormControl(this.from, Validators.required,),
-      to: new FormControl(this.to, Validators.required,),
+    from: new FormControl(this.from, Validators.required,),
+    to: new FormControl(this.to, Validators.required,),
 
-    },
+  },
   )
   add3 = new FormGroup({
-      date: new FormControl('', [Validators.required]),
-      nbplace: new FormControl('', [Validators.required, Validators.min(0), Validators.max(7)]),
-      price: new FormControl('', Validators.required),
-      description: new FormControl(''),
-    },
+    date: new FormControl('', [Validators.required]),
+    nbplace: new FormControl('', [Validators.required, Validators.min(0), Validators.max(7)]),
+    price: new FormControl('', Validators.required),
+    description: new FormControl(''),
+  },
   )
   id: any;
-  constructor(private spinner: NgxSpinnerService, private route: ActivatedRoute, private router: Router, private api: PublicationserviceService) { }
+  constructor(private encryptionService: EncryptionServiceService, private spinner: NgxSpinnerService, private route: ActivatedRoute, private router: Router, private api: PublicationserviceService) { }
   date: any;
+
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.id = this.route.snapshot.params['id'];
-
+    this.id = this.encryptionService.decrypt(this.id);
     this.getOldData();
-
     this.spinner.show();
-
     setTimeout(() => {
       /** spinner ends after 5 seconds */
       this.spinner.hide();
     }, 500);
-
-
-
-
-    this.userId = localStorage.getItem('idUser');
-    this.email = localStorage.getItem('email');
     this.date = new Date().toISOString().slice(0, 16);
   }
 
   getOldData() {
     this.api.getpub(this.id).subscribe((res: any) => {
-      console.log("aaaa");
 
-      console.log(res);
       this.add.setValue({
         name: "aaa",
         number: "95590010",
@@ -109,7 +101,6 @@ export class EditCovComponent implements OnInit {
       });
       this.selectedItems.push(res.from)
       this.selectedItems2.push(res.to)
-      console.log(res.from);
       this.disabled = res.disable;
       if (this.disabled == true) {
         this.disabled_texte = "afficher la publication";
@@ -149,21 +140,21 @@ export class EditCovComponent implements OnInit {
       let firstdate = this.add3.value.date?.substring(0, this.add3.value.date.indexOf("T"));
       let seconddate = this.add3.value.date?.substring(this.add3.value.date.indexOf("T") + 1, this.add3.value.date.length);
 
-      this.api.update(this.id, { "from": this.from, "to": this.to, "prix": this.add3.value.price, "description": this.add3.value.description, "heure": seconddate, "date": firstdate, "user": { "_id": this.userId }, "email": this.email }).subscribe((res: any) => {
-          console.log("res");
-          console.log(res);
-          if (res.status = 200) {
-            Swal.fire(
-              'Excellent!',
-              'Vous avez bien modifié votre covoiturage!',
-              'success'
-            ),
-              this.router.navigate(['/home']);
+      this.api.update(this.id, { "from": this.from, "to": this.to, "prix": this.add3.value.price, "description": this.add3.value.description, "heure": seconddate, "date": firstdate, "email": this.email }).subscribe((res: any) => {
+        console.log("res");
+        console.log(res);
+        if (res.status = 200) {
+          Swal.fire(
+            'Excellent!',
+            'Vous avez bien modifié votre covoiturage!',
+            'success'
+          ),
+            this.router.navigate(['/home']);
 
-          }
+        }
 
 
-        },
+      },
         err => {
           Swal.fire(
             'Vous avez dépassé la limite !',
@@ -193,6 +184,7 @@ export class EditCovComponent implements OnInit {
       const date = moment(event.target.value);
       const today = moment();
       console.log(date);
+      console.log(today);
 
       if (date.isBefore(today)) {
         console.log("hhhh");

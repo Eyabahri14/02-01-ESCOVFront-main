@@ -1,35 +1,61 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { EncryptionServiceService } from './encryption-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PublicationserviceService {
-
-  constructor(private http:HttpClient) { }
-  public Search(Data : any){
-    console.log(Data);
-
-    return this.http.post( environment.api +'/api/publications/search',Data);
+  data: any;
+  token: any;
+  constructor(private encryptionService: EncryptionServiceService, private http: HttpClient) {
+  
   }
-  public Add(Data : any){
-    console.log("data");
-    console.log(Data);
-    return this.http.post( environment.api +'/api/publications/',Data);
+  public Search(Data: any) {
+    return this.http.post(environment.api + '/api/publications/search', Data);
   }
 
-  public latest(){
-    return this.http.get( environment.api +'/api/publications/latest');
+  public Add(Data: any) {
+    this.data = this.encryptionService.decrypt(localStorage.getItem('data')!);
+    this.token = this.data["token"];
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'responseType': 'json',
+      'id': this.token!,
+
+    });
+    return this.http.post(environment.api + '/api/publications/', Data, { headers: headers });
   }
-  public getpub(data:any){
-    return this.http.get( environment.api +`/api/publications/${data}`);
+
+  public latest() {
+    return this.http.get(environment.api + '/api/publications/latest');
   }
-  public delete(data:any){
-    return this.http.delete( environment.api +`/api/publications/${data}`);
+  public getpub(data: any) {
+    return this.http.get(environment.api + `/api/publications/${data}`);
   }
-  public update(id:any,data:any){
-    return this.http.put( environment.api +`/api/publications/${id}`,data);
+  public delete(data: any) {
+    this.data = this.encryptionService.decrypt(localStorage.getItem('data')!);
+    this.token = this.data["token"];
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'responseType': 'json',
+      'id': this.token!,
+
+    });
+    return this.http.delete(environment.api + `/api/publications/${data}`, { headers: headers });
+  }
+  public update(id: any, data: any) {
+    this.data = this.encryptionService.decrypt(localStorage.getItem('data')!);
+    this.token = this.data["token"];
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'responseType': 'json',
+      'id': this.token!,
+
+    });
+    return this.http.put(environment.api + `/api/publications/${id}`, data, { headers: headers });
   }
 
 

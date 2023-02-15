@@ -6,7 +6,9 @@ import { User } from "./User";
 import { Publication } from "./Publication";
 import { PublicationserviceService } from '../publicationservice.service';
 import Swal from 'sweetalert2';
-import {NgxSpinnerService} from "ngx-spinner";
+import { NgxSpinnerService } from "ngx-spinner";
+import { EncryptionServiceService } from '../encryption-service.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-profile',
@@ -28,22 +30,22 @@ export class ProfileComponent implements OnInit {
   private angular: any;
   public userName: any;
   public email: any;
+  public data: any;
 
-  constructor(private router: Router, private userService: UserService, private route: ActivatedRoute, private publicationService: PublicationserviceService,private spinner:NgxSpinnerService) { }
+  constructor(private encryptionService: EncryptionServiceService, private router: Router, private userService: UserService, private route: ActivatedRoute, private publicationService: PublicationserviceService, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
     this.spinner.show();
 
     setTimeout(() => {
       /** spinner ends after 5 seconds */
       this.spinner.hide();
     }, 500);
-    this.id = this.route.snapshot.params['id'];
 
-    this.userName = localStorage.getItem('username');
-    this.email = localStorage.getItem('email');
-    this.GetPubByEmail()
+
+
+    this.GetPubByEmail();
 
 
 
@@ -266,16 +268,8 @@ export class ProfileComponent implements OnInit {
 
 
   GetPubByEmail() {
-    this.userService.getPubByEmail(this.email).subscribe(res => {
-
-      // this.user=res["user"]
-      //  console.log(this.user.username);
-      // console.log('liddddd')
-      //  console.log(this.user._id)
-      // console.log(this.user.publication[0])
-      // this.userService.getPublicationSByUserId(this.user._id).subscribe(res1=> {
+    this.userService.getPubByEmail().subscribe(res => {
       this.publication = res[0]["publication"];
-      // console.log("publicationsss")
       console.log(this.publication)
 
       //  })
@@ -312,6 +306,14 @@ export class ProfileComponent implements OnInit {
 
 
 
+  }
+  redirect(id: any, heure: any, dated: any) {
+    this.id = this.encryptionService.encrypt(id);
+    this.encryptionService.encrypt({ username: this.userName });
+    let datecomplete = dated + " " + heure;
+    const date = moment(datecomplete);
+    const today = moment();
+    this.router.navigate(['/covoiturage/', this.id]);
   }
 
 }

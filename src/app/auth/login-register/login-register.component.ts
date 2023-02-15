@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
-import {AuthService} from "../../auth.service";
-import {data} from "jquery";
-import Swal from "sweetalert2";
+
+import { AuthService } from "../../auth.service";
+import { data } from "jquery";
+import { EncryptionServiceService } from 'src/app/encryption-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login-register',
@@ -11,26 +13,29 @@ import Swal from "sweetalert2";
   styleUrls: ['./login-register.component.css']
 })
 export class LoginRegisterComponent implements OnInit {
-public userName:any;
-public email1:any;
-public contact:any;
-public id:any;
-  userLogin= new FormGroup({
-    email : new FormControl('',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]+\.[a-zA-Z0-9]+@esprit\.tn$/)]),
-    password : new FormControl('',[Validators.required])
+
+  public userName: any;
+  public email1: any;
+  public contact: any;
+  public id: any;
+  data: any;
+
+  userLogin = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+\.[a-zA-Z0-9]+@esprit\.tn$/)]),
+    password: new FormControl('', [Validators.required])
 
   })
-  userRegister= new FormGroup({
-    username : new FormControl('',[Validators.required,Validators.minLength(7),Validators.maxLength(20)]),
-    email : new FormControl('',[Validators.required,Validators.pattern(/^[a-zA-Z0-9]+\.[a-zA-Z0-9]+@esprit\.tn$/)]),
-    password :new FormControl('',[Validators.required]),
-    contact : new FormControl('', [Validators.required,Validators.minLength(8),Validators.maxLength(8)])
+  userRegister = new FormGroup({
+    username: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(20)]),
+    email: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+\.[a-zA-Z0-9]+@esprit\.tn$/)]),
+    password: new FormControl('', [Validators.required]),
+    contact: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)])
 
   })
 
 
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private encryptionService: EncryptionServiceService) { }
 
   ngOnInit(): void {
 
@@ -56,62 +61,69 @@ public id:any;
 
 
   login() {
-    //console.log(this.userLogin.value);
-
-
-      this.authService.login(this.userLogin.value).subscribe(
-        data => {
-          if ((data as {[key: string]: any})['token'] .length!=0){
-            this.userName=(data as {[key: string]: any})['username'];
-            this.email1=(data as {[key: string]: any})['email'];
-            this.contact=(data as {[key: string]: any})['contact'];
-            this.id=(data as {[key: string]: any})['idUser'];
-
-            localStorage.setItem('username', this.userName);
-            localStorage.setItem('token', ((data as {[key: string]: any})['token']));
-            localStorage.setItem('email', this.email1);
-            localStorage.setItem('contact', this.contact);
-            localStorage.setItem('idUser', this.id);
-
-            // console.log(((data as {[key: string]: any})['token']));
-            console.log(data);
-            this.router.navigate(['/home']);
-          }
-
-        },
-
-        error => {
-          if(error.status==400){
-            Swal.fire(
-              'erreur!',
-              'Votre mot de passe est incorrect!',
-              'error'
-            );
-          }
+    this.authService.login(this.userLogin.value).subscribe(
+      data => {
+        if ((data as { [key: string]: any })['token'].length != 0) {
+          this.userName = (data as { [key: string]: any })['username'];
+          this.email1 = (data as { [key: string]: any })['email'];
+          this.contact = (data as { [key: string]: any })['contact'];
+          this.id = (data as { [key: string]: any })['idUser'];
+          localStorage.setItem('data', this.encryptionService.encrypt({ username: this.userName, email: this.email1, contact: this.contact, token: ((data as { [key: string]: any })['token']) }));
+          this.router.navigate(['/home']);
         }
-      );
+      },
+      error => {
+        console.log(error.status);
 
 
+        if (error.status == 401) {
+          Swal.fire(
+            'Erreur!',
+            'cet utilisateur n existe pas ',
+            'error'
+          )
+
+        }
+        else if (error.status == 402) {
+          Swal.fire(
+            'Erreur!',
+            'Votre mot de passe est incorrecte',
+            'error'
+          )
+
+        }
+        else if (error.status == 403) {
+          Swal.fire(
+            'Erreur!',
+            'Veuillez activer votre compte ',
+            'error'
+          )
+
+        }
+
+      }
+    );
   }
 
 
-  Register(){ this.authService.register(this.userRegister.value).subscribe((res: any) => {
 
+  Register() {
+    this.authService.register(this.userRegister.value).subscribe((res: any) => {
       Swal.fire(
         'Excellent!',
-        'Vous avez bien ajouté votre compte!',
+        'Veuillez verifier votre email afin d activer votre compte !',
         'success'
       );
-    },
-    err => {
-      if (err.status==400) {
+    }, (err) => {
+      if (err.status == 400) {
         Swal.fire(
           'erreur!',
           'Email existant!',
           'error'
         );
       }
-      else if (err.status==402){
+
+      else if (err.status == 402) {
         Swal.fire(
           'erreur!',
           'Veuillez indiquer votre email esprit!',
@@ -119,9 +131,7 @@ public id:any;
         );
       }
 
-    }
-
-  )
+    })
 
   }
 

@@ -1,7 +1,6 @@
-
-@font-face{
+@font-face {
   font-family: "Kanit";
-  src:url("src/assets/fonts/Kanit/Kanit-Bold.ttf")format("ttf");
+  src: url("src/assets/fonts/Kanit/Kanit-Bold.ttf")format("ttf");
 
 }
 
@@ -118,14 +117,14 @@ figcaption {
 
 html[xmlns] .clearfix {
   display: block;
-  overflow-y:scroll;
+  overflow-y: scroll;
   overflow-x: hidden;
   margin-right: calc(-1 * (100vw - 100%));
 }
 
 * html .clearfix {
   height: 1%;
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
 
 ul,
@@ -161,6 +160,8 @@ body {
   -ms-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+
 }
 
 a {
@@ -1247,20 +1248,41 @@ Footer Style
 ---------------------------------------------
 */
 
-footer {
+/* footer {
   background-color: #7fc6a6;
   text-align: center;
-  padding: 25px 0px;
-}
+  justify-content: center;
+  align-items: center;
+  /* padding: 25px 0px;
+  height: 50px;
+  position: relative;
+  bottom: 0;
+} */
 
+footer {
+  height: 70px;;
+  clear:both;
+  position:relative;
+  bottom:0;
+  width: 100%;
+  background-color: #7fc6a6;
+
+}
 footer p {
   color: #fff;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1%;
 }
 
 footer p a {
   color: #fff;
   font-weight: 500;
   transition: all .3s;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 footer p a:hover {
@@ -1268,7 +1290,22 @@ footer p a:hover {
   opacity: 0.75;
 }
 
+@media screen and (max-width: 950px) {
 
+  footer {
+    margin: 0;
+    padding: 0;
+    background-color: #7fc6a6;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    /* padding: 25px 0px; */
+    height: 70px;
+    position: relative;
+   width: 100%;
+    bottom: 0;
+  }
+}
 
 /*
 ---------------------------------------------
@@ -2062,8 +2099,8 @@ Deals Page Style
 */
 
 .page-heading {
-  /* background-image: url("../images/photoescov.png"); */
- /* background-image: url("https://media.tenor.com/Hsm0cKGy5EcAAAAd/driving-road-trip.gif"); */
+   background-image: url("../images/photoescov.png");
+  /* background-image: url("https://carpooling.twogo.com/_processed_/5/d/csm_img-section-video_3fd26a166d.jpg"); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2097,7 +2134,7 @@ Deals Page Style
 }
 
 .search-form #search-form {
-  background-color: #7fc6a6;
+  background-color: #7fc6a6 ;
   border-bottom-left-radius: 23px;
   border-bottom-right-radius: 23px;
   padding: 35px 60px;
@@ -2253,7 +2290,7 @@ Reservation Page Style
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 260px 0px 190px 0px;
+  padding: 260px 0px 140px 0px;
   text-align: center;
 }
 
@@ -2339,7 +2376,8 @@ Reservation Page Style
 }
 
 .reservation-form {
-  display: flex; /* Required for order to work */
+  display: flex;
+  /* Required for order to work */
   order: -1;
   margin: 120px 0px;
 }
@@ -2348,10 +2386,13 @@ Reservation Page Style
   margin-bottom: -6px;
 }
 
-.indexeii{
-  position: relative; /* Required for z-index to work */
-  z-index: -1; /* This container will be positioned below elements with a higher z-index */
+.indexeii {
+  position: relative;
+  /* Required for z-index to work */
+  z-index: -1;
+  /* This container will be positioned below elements with a higher z-index */
 }
+
 .reservation-form #reservation-form h4 {
 
   font-size: 30px;
@@ -2571,6 +2612,24 @@ body {
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 3px;
+  }
+
+  .reservation-form #reservation-form button {
+    font-size: 14px;
+    color: #fff;
+    background-color: #7fc6a6;
+    border: 1px solid #7fc6a6;
+    padding: 12px 0px;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    border-radius: 25px;
+    font-weight: 500;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
   }
 }
 

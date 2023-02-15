@@ -1,21 +1,21 @@
 <h4>Votre <em>Profile</em></h4>
 <br>
 <div style="display: flex;justify-content: center;align-items: center">
-  <div class="profile-container" >
+  <div class="profile-container">
 
     <div class="circle" [ngStyle]="{'background-color':  circleColor }">
-      <img class="avatar"   class="user" *ngIf="!showInitials" src="{{photoUrl}}">
+      <img class="avatar" class="user" *ngIf="!showInitials" src="{{photoUrl}}">
 
-      <div   *ngIf="showInitials" class="initials">
+      <div *ngIf="showInitials" class="initials">
         {{ initials }}
       </div>
     </div>
     <div class="profile-info">
       <h1>{{username}}</h1>
-      <p>ESPRIT Student</p>
       <p><strong>.</strong>{{email}}</p>
-      <p><strong>.</strong>  <i style="color: #0c0c65" class="fa-solid fa-phone fa-shake "></i>+216 {{contact}}</p>
+      <p><strong>.</strong> <i style="color: #0c0c65" class="fa-solid fa-phone fa-shake "></i>+216 {{contact}}</p>
+      <a style="cursor: pointer; cursor: hand;text-decoration: underline !important;color: black;" (click)="open()">Edit your profile</a>
+
     </div>
   </div>
 </div>
-

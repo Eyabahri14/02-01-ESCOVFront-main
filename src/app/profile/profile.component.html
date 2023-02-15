@@ -55,15 +55,16 @@
                       </div>
                       <div class="card__face__stats card__face__stats--req">
                         Date
-                        <p>{{p.date}}</p>
+                        <p style="font-size: 12px;">{{p.date}}</p>
                       </div>
                       <div class="card__face__stats card__face__stats--pledge">
-                        En demande
-                        <p>{{p.isdemand}}</p>
+                        phone 
+                        <p style="font-size: 12px;">{{p.contact}}</p>
                       </div>
-                      <button [routerLink]="'/editcov/'+p._id"  style="border:0px;background-color:#0060c6 ;width: 30px;height:33px;padding: 6px 6px;position:absolute; top:0; right:0;margin-right: 08%;margin-top: 04%;" class="some-button">
 
-                        <i class="fa-solid fa-arrow-right"></i>                    </button>
+                    <button [routerLink]="'/covoiturage/'+p._id"  style="border:0px;background-color:#0060c6 ;width: 30px;height:33px;padding: 6px 6px;position:absolute; top:0; right:0;margin-right: 08%;margin-top: 04%;" class="some-button">
+
+                        <i class="fa-solid fa-arrow-right"></i>        </button>
                     </div>
 
                   </div>
@@ -73,6 +74,14 @@
             </div>
           </div>
         </div>
+
+
+
+
+
+
+
+
         <pagination-controls class=" col-lg-12 section-heading text-center" (pageChange)="p = $event">
         </pagination-controls>
       </form>

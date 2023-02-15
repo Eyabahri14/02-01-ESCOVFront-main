@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import Swal from 'sweetalert2';
+import { EncryptionServiceService } from '../encryption-service.service';
 import { NewsletterService } from '../newsletter.service';
 @Component({
   selector: 'app-about',
@@ -10,8 +11,9 @@ import { NewsletterService } from '../newsletter.service';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-  public userId: any;
-  constructor(private route: ActivatedRoute, private router: Router, private api: NewsletterService) { }
+  public data: any;
+  public token: any;
+  constructor(private encryptionService: EncryptionServiceService, private route: ActivatedRoute, private router: Router, private api: NewsletterService) { }
   add = new FormGroup({
     from: new FormControl('', Validators.required),
     to: new FormControl('', Validators.required),
@@ -41,8 +43,8 @@ export class AboutComponent implements OnInit {
   };
   ngOnInit() {
     window.scrollTo(0, 0);
-
-    this.userId = localStorage.getItem('idUser');
+    this.data = this.encryptionService.decrypt(localStorage.getItem('data')!);
+    this.token = this.data["token"];
   }
   onItemSelect(item: any) {
     this.selectedItems.push(item);
@@ -59,40 +61,49 @@ export class AboutComponent implements OnInit {
 
   addData() {
 
-    if (Array.isArray(this.add.value.from)) {
-      this.add.value.from?.forEach((element, index) => {
-        this.from.push(element['item_text']);
+    if (this.token) {
 
-      });
+      if (Array.isArray(this.add.value.from)) {
+        this.add.value.from?.forEach((element, index) => {
+          this.from.push(element['item_text']);
+
+        });
+      }
+
+      console.log(this.from);
+      if (Array.isArray(this.add.value.to)) {
+        this.add.value.to?.forEach((element, index) => {
+          this.to.push(element['item_text']);
+
+        });
+      }
+
+      console.log(this.to);
+      if (this.add.valid) {
+
+        this.api.Add({ "from": this.from, "to": this.to, "date": this.add.value.date }).subscribe((res: any) => {
+
+          if (res) {
+            Swal.fire(
+              'Excellent',
+              'Nous allons vous envoyer un email des qqn publie un covoiturage',
+              'success'
+            ),
+              this.router.navigate(['/home']);
+
+          }
+        })
+      } else {
+        this.add.setErrors({ ...this.add.errors, 'yourErrorName': true });
+        return;
+      }
     }
-
-    console.log(this.from);
-    if (Array.isArray(this.add.value.to)) {
-      this.add.value.to?.forEach((element, index) => {
-        this.to.push(element['item_text']);
-
-      });
-    }
-
-    console.log(this.to);
-    if (this.add.valid) {
-
-      this.api.Add({ "from": this.from, "to": this.to, "user": { "_id": this.userId }, "date": this.add.value.date }).subscribe((res: any) => {
-
-        if (res) {
-          Swal.fire(
-            'Excellent',
-            'Nous allons vous envoyer un email des qqn publie un covoiturage',
-            'success'
-          ),
-            this.router.navigate(['/home']);
-
-        }
-      })
-    } else {
-      this.add.setErrors({ ...this.add.errors, 'yourErrorName': true });
-      return;
+    else {
+      Swal.fire(
+        'error',
+        'Veuillez vous connecter afin de postuler votre demande',
+        'error'
+      )
     }
   }
-
 }

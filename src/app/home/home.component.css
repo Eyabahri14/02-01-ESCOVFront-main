@@ -8,7 +8,7 @@
   position: absolute;
   width: 40px;
   height: 2px;
-  background: #71bc42;
+  background: #7fc6a6 ;
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
@@ -106,7 +106,7 @@ h5,
     position: absolute;
     z-index: 2;
     top: 200px;
-    left: 80px;
+    left: 45px;
     font-family: Poppins;
 
   }

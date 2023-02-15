@@ -5,7 +5,8 @@ import { PublicationserviceService } from '../publicationservice.service';
 import Swal from 'sweetalert2';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import * as moment from 'moment';
-import {NgxSpinnerService} from "ngx-spinner";
+import { NgxSpinnerService } from "ngx-spinner";
+import { EncryptionServiceService } from '../encryption-service.service';
 
 @Component({
   selector: 'app-addcov',
@@ -15,6 +16,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 export class AddcovComponent implements OnInit {
   step = 0;
   date2: any;
+  data: any;
   selectedItems: string[] = [];
   selectedItems2: string[] = [];
   public userId: any;
@@ -40,16 +42,13 @@ export class AddcovComponent implements OnInit {
   from: string = "";
   to: string = "";
   add = new FormGroup({
-    name: new FormControl('', Validators.required),
-    number: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
-
+    username: new FormControl('', Validators.required),
+    contact: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
   },
   )
   add2 = new FormGroup({
-
     from: new FormControl(this.from, Validators.required,),
     to: new FormControl(this.to, Validators.required,),
-
   },
   )
   add3 = new FormGroup({
@@ -59,18 +58,24 @@ export class AddcovComponent implements OnInit {
     description: new FormControl(''),
   },
   )
-  constructor(private route: ActivatedRoute, private router: Router, private api: PublicationserviceService,private spinner:NgxSpinnerService) { }
+  constructor(private encryptionService: EncryptionServiceService, private route: ActivatedRoute, private router: Router, private api: PublicationserviceService, private spinner: NgxSpinnerService) { }
   date: any;
   ngOnInit(): void {
-    window.scrollTo(0,0);
+    this.data = this.encryptionService.decrypt(localStorage.getItem('data')!);
+    this.add.setValue({
+      username: this.data["username"],
+      contact: this.data["contact"],
+
+    });
+    window.scrollTo(0, 0);
     this.spinner.show();
 
     setTimeout(() => {
       /** spinner ends after 5 seconds */
       this.spinner.hide();
     }, 500);
-    this.userId = localStorage.getItem('idUser');
-    this.email = localStorage.getItem('email');
+
+
     this.date = new Date().toISOString().slice(0, 16);
   }
 
@@ -83,42 +88,16 @@ export class AddcovComponent implements OnInit {
   }
 
   addData() {
-    // if (!this.add.valid) {
-    //   this.add.setErrors({ ...this.add.errors, 'yourErrorName': true });
+    if (this.step != 2) {
+      this.step++;
 
-    // }
-    // else {
-    //   this.step++;
-
-    // }
-    // if (!this.add2.valid) {
-    //   this.add2.setErrors({ ...this.add2.errors, 'yourErrorName': true });
-    // }
-    // else {
-    //   this.step++;
-
-    // }
-    // if (!this.add3.valid) {
-    //   this.add3.setErrors({ ...this.add3.errors, 'yourErrorName': true });
-    // }
-    // else {
-    //   this.step++;
-    //   console.log(this.step);
-
-
-    // }
-    if (this.step !=2 ) {
-this.step++;
-
-    }else{
+    } else {
       if (Array.isArray(this.add2.value.from)) {
         this.add2.value.from?.forEach((element, index) => {
           this.from = (element['item_text']);
-
         });
       }
 
-      // console.log(this.from);
       if (Array.isArray(this.add2.value.to)) {
         this.add2.value.to?.forEach((element, index) => {
           this.to = (element['item_text']);
@@ -128,10 +107,10 @@ this.step++;
       let firstdate = this.add3.value.date?.substring(0, this.add3.value.date.indexOf("T"));
       let seconddate = this.add3.value.date?.substring(this.add3.value.date.indexOf("T") + 1, this.add3.value.date.length);
 
-      this.api.Add({ "from": this.from, "to": this.to, "prix": this.add3.value.price, "description": this.add3.value.description, "heure": seconddate, "date": firstdate, "user": { "_id": this.userId },"email": this.email}).subscribe((res: any) => {
+      this.api.Add({ "from": this.from, "to": this.to, "prix": this.add3.value.price, "description": this.add3.value.description, "heure": seconddate, "date": firstdate, "email": this.email,"username":this.add.value.username,"contact":this.add.value.contact }).subscribe((res: any) => {
         console.log("res");
         console.log(res);
-        if (res.status=200) {
+        if (res.status = 200) {
           Swal.fire(
             'Excellent!',
             'Vous avez bien ajouté votre covoiturage!',
@@ -143,15 +122,15 @@ this.step++;
 
 
       },
-      err => {
-        Swal.fire(
-          'Vous avez dépassé la limite !',
-          err["error"]["message"],
-          'error'
-        ),
-console.log(err["error"]["message"]);
+        err => {
+          Swal.fire(
+            'Vous avez dépassé la limite !',
+            err["error"]["message"],
+            'error'
+          ),
+            console.log(err["error"]["message"]);
 
-      })
+        })
 
 
 

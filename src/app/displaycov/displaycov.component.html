@@ -48,8 +48,8 @@
                     </div>
                     <div class="col-lg-2" class="size">
                       <fieldset>
-                        <input type="date" id="start" [(ngModel)]="date" formControlName="date" name="trip-start"
-                          value="2018-07-22" class="da">
+                        <input type="date" id="start" formControlName="date" name="trip-start" value="2018-07-22"
+                               class="da">
                       </fieldset>
                     </div>
                     <div class="col-lg-1">
@@ -109,6 +109,7 @@
 
                       <section class="card__part card__part-2">
 
+
                         <div class="card__part__side m--back">
 
                           <div class="card__part__inner card__face">
@@ -130,15 +131,15 @@
                             </div>
                             <div class="card__face__stats card__face__stats--req">
                               Date
-                              <p>{{p.date}}</p>
+                              <p style="font-size: 12px;">{{p.date}}</p>
                             </div>
                             <div class="card__face__stats card__face__stats--pledge">
-                              En demande
-                              <p>{{p.isdemand}}</p>
+                              Télephone
+                              <p style="font-size: 12px;">{{p.contact}}</p>
                             </div>
-                            <button [routerLink]="'/editcov/'+p._id"  style="border:0px;background-color:#0060c6 ;width: 30px;height:33px;padding: 6px 6px;position:absolute; top:0; right:0;margin-right: 08%;margin-top: 04%;" class="some-button">
 
-                              <i class="fa-solid fa-arrow-right"></i>                    </button>
+
+
                           </div>
 
                         </div>
@@ -148,7 +149,6 @@
                   </div>
                 </div>
               </div>
-
 
 
 
